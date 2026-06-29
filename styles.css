@@ -18,11 +18,10 @@ html,body{
   background:linear-gradient(180deg,var(--bg),#4f6f94);
 }
 
-/* wallpaper (can set image) */
 .wallpaper{
   position:absolute;
   inset:0;
-  background-image: url('');
+  background-image: url('/images/wallpaper.jpg');
   background-size:cover;
   background-position:center;
   filter:brightness(0.96);
@@ -110,21 +109,122 @@ html,body{
   left:0;
   right:0;
   bottom:0;
-  height:36px;
-  background:var(--taskbar);
-  border-top:2px solid #7f7f7f;
+  height:30px;
+
+  background: linear-gradient(
+    to bottom,
+    #245edb 0%,
+    #3f8cf3 8%,
+    #245edb 50%,
+    #1941a5 100%
+  );
+
+  border-top:1px solid #7aa7ff;
+
   display:flex;
   align-items:center;
   gap:8px;
-  padding:0 8px;
+  
+
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.35),
+    0 -1px 3px rgba(0,0,0,.5);
+
+  z-index:1000;
 }
 #start-btn{
-  height:28px;
-  min-width:70px;
-  background:#e7e7e7;
-  border:1px solid #9b9b9b;
-  border-radius:2px;
-  cursor:pointer;
+  height: 30px;
+  min-width: 75px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 10px;
+  padding-right: 22px;
+  gap: 6px;
+
+
+
+  position: relative;
+  overflow: hidden;
+
+  background: linear-gradient(
+    to bottom,
+    #6be64c 0%,
+    #2fae1a 45%,
+    #1c7f00 55%,
+    #146000 100%
+  );
+
+  border-top: 1px solid #9cff8a;
+  border-left: 1px solid #3fbf2a;
+  border-right: 1px solid #0b4f00;
+  border-bottom: 1px solid #063300;
+
+  border-radius: 0 10px 6px 0;
+
+  color: white;
+  font-weight: bold (700);
+  font-family: Tahoma;
+  font-size: 17px;
+  text-shadow: 1px 1px 0 rgba(0,0,0,0.25);
+
+  position: relative;
+  top: 0.5px;
+  cursor: pointer;
+
+  text-shadow: 1px 1px rgba(0,0,0,0.6);
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.45),
+    inset 0 -2px 3px rgba(0,0,0,0.35);
+}
+
+
+#start-btn:hover{
+  background: linear-gradient(
+    to bottom,
+    #7ef25a,
+    #1faa00
+  );
+}
+#start-btn img,
+#start-btn span {
+  transform: translateY(-2px);
+}
+#start-btn::after{
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 45%;
+
+  background: linear-gradient(
+    to bottom,
+    rgba(255,255,255,0.35),
+    transparent
+  );
+
+  pointer-events: none;
+}
+
+#start-btn:active{
+  border-top: 1px solid #063300;
+  border-left: 1px solid #063300;
+  border-right: 1px solid #3fbf2a;
+  border-bottom: 1px solid #9cff8a;
+
+  box-shadow:
+    inset 0 3px 6px rgba(0,0,0,0.5);
+
+  transform: translateY(1px);
+}
+
+
+#start-btn img{
+  width: 17px;
+  height: 17px;
 }
 #taskbar-windows{ flex:1; display:flex; gap:6px; align-items:center; padding-left:8px; }
 #taskbar-windows .tb-item{
