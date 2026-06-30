@@ -3,6 +3,7 @@
   --taskbar:#cfcfcf;
   --title:#0a4e8c;
   --window:#ffffff;
+  --titlebar-height: 28px;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -10,7 +11,11 @@
 html,body{
   height:100%;
   margin:0;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
 }
+
+/* desktop */
 #desktop{
   position:relative;
   height:100vh;
@@ -44,28 +49,31 @@ html,body{
   touch-action:none; /* evita el scroll táctil mientras arrastras */
 }
 .icon:focus{ box-shadow: 0 0 0 2px rgba(255,255,255,0.6); }
+
 /* Esto asegura que la imagen tome el tamaño que definimos para el contenedor */
 .icon-img img {
-  width: 48px;  /* Ajustalo a 32px o 48px según qué tan grande quieras el ícono */
+  width: 48px;
   height: 48px;
-  object-fit: contain; /* Evita que la imagen se deforme o estire feo */
-
+  object-fit: contain;
+  display:block;
 }
+
 .icon-label{
   color:#f5f5f5;
   text-shadow: 1px 1px 0 rgba(0,0,0,0.6);
   font-size:13px;
-  display: block; 
+  display: block;
   white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
+  margin-top:4px; /* label closer to icon */
 }
 .icon.dragging,
 .icon:active{
   cursor:grabbing;
 }
 
-/* styled windows */
+/* ===== Windows ===== */
 .window{
   position:absolute;
   width:420px;
@@ -78,10 +86,19 @@ html,body{
   top:80px;
   left:160px;
   border-radius:2px;
-  overflow:hidden;
+
+  /* allow resizer hit area outside window border while keeping content clipped */
+  overflow: visible;
+  box-sizing: border-box;
 }
+
+/* ensure consistent sizing model */
+.window, .window * {
+  box-sizing: border-box;
+}
+
 .titlebar{
-  height:28px;
+  height:var(--titlebar-height);
   background:linear-gradient(180deg,var(--title), #0d4b82);
   color:white;
   display:flex;
@@ -89,6 +106,9 @@ html,body{
   align-items:center;
   padding:0 6px;
   cursor:move;
+  width:100%;
+  box-sizing:border-box;
+  z-index:2;
 }
 .title{ font-weight:600; font-size:13px; }
 .controls button{
@@ -102,12 +122,21 @@ html,body{
   height:22px;
   cursor:pointer;
 }
+
+/* content occupies remaining space inside window and scrolls internally */
 .content{
   padding:12px;
   color:#222;
-  height:calc(100% - 28px);
   overflow:auto;
+  /* subtract titlebar height so content never overflows the window box */
+  max-height: calc(100% - var(--titlebar-height));
+  box-sizing: border-box;
+  position:relative;
 }
+
+/* nicer scrollbar inside windows */
+.content::-webkit-scrollbar { width: 12px; height: 12px; }
+.content::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.18); border-radius: 8px; }
 
 /* taskbar */
 #taskbar{
@@ -130,7 +159,6 @@ html,body{
   display:flex;
   align-items:center;
   gap:8px;
-  
 
   box-shadow:
     inset 0 1px rgba(255,255,255,.35),
@@ -140,20 +168,16 @@ html,body{
 }
 #start-btn {
   height: 30px;
-  min-width: 90px; /* El original de XP en inglés/español ronda los 100px-110px */
-
+  min-width: 90px;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   padding-left: 6px;
   padding-right: 10px;
   gap: 6px;
-
   position: relative;
   overflow: hidden;
   cursor: pointer;
-
-  /* 🟩 Degradado VERDE oficial pulido: más vivo y con transición suave */
   background: linear-gradient(
     to bottom,
     #53b432 0%,
@@ -162,31 +186,21 @@ html,body{
     #1b7407 52%,
     #186705 100%
   );
-
-  /* 🧱 Bordes exactos: Verde brillante arriba/izquierda, oscuro abajo/derecha */
   border-top: 1px solid #82df59;
   border-left: 1px solid #53b432;
   border-right: 1px solid #0f4a02;
   border-bottom: 1px solid #0b3401;
-
-  /* ↪️ Curva corregida: Solo redondeado a la IZQUIERDA */
- border-radius: 0 10px 6px 0;
-
-  /* ✍️ Tipografía corregida */
+  border-radius: 0 10px 6px 0;
   color: white;
-  font-weight: 700; /* Sintaxis corregida */
+  font-weight: 700;
   font-family: "Tahoma", sans-serif;
-  font-size: 16px; /* 16px se ajusta mejor a la proporción real */
-  font-style: italic; /* ¡El texto "inicio" o "start" original es inclinado! */
+  font-size: 16px;
+  font-style: italic;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);
-
-  /* 🎛️ Sombras internas para efecto 3D gomoso */
   box-shadow:
     inset 1px 1px 1px rgba(255, 255, 255, 0.4),
     inset -1px -1px 1px rgba(0, 0, 0, 0.2);
 }
-
-/* 🔦 Hover pulido con el degradado de iluminación original de XP */
 #start-btn:hover {
   background: linear-gradient(
     to bottom,
@@ -199,8 +213,6 @@ html,body{
   border-top: 1px solid #a1ee7e;
   border-left: 1px solid #69cc45;
 }
-
-/* ✨ Efecto de brillo superior */
 #start-btn::after {
   content: "";
   position: absolute;
@@ -215,8 +227,6 @@ html,body{
   );
   pointer-events: none;
 }
-
-/* 🛠️ Solución limpia para el click (sin romper alineaciones flex) */
 #start-btn:active {
   background: linear-gradient(
     to bottom,
@@ -229,44 +239,23 @@ html,body{
   border-bottom: 1px solid #82df59;
   box-shadow: inset 1px 2px 5px rgba(0,0,0,0.8);
 }
-
-/* 🖼️ Centrado del Icono y Texto sin desfasar el flexbox */
 #start-btn img,
-#start-btn span {
-  display: inline-block;
-}
+#start-btn span { display: inline-block; }
+#start-btn img { width: 18px; height: 16px; }
 
-#start-btn img {
-  width: 18px;
-  height: 16px;
-}
 #clock {
   min-width: 60px;
   height: 30px;
   font-size: 13px;
   color: white;
   text-shadow: 1px 1px rgba(0, 0, 0, 0.6);
-  font-family: Tahoma, sans-serif; /* Tipografía oficial de XP */
-  
-  /* 🛠️ Alineación vertical y horizontal */
+  font-family: Tahoma, sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
-
-  /* 💙 Degradado CELESTE oficial del System Tray de Windows XP */
-  background: linear-gradient(
-    to bottom,
-    #0d9aff 0%, /* Celeste claro superior */
-    #1ea7fd 100% /* Celeste un poco más vivo inferior */
-  );
-
-  /* 🧱 Bordes realistas de la bandeja de XP */
+  background: linear-gradient(to bottom, #0d9aff 0%, #1ea7fd 100%);
   border-left: 1px solid #0080ff;
-  border-top: 1px solid rgba(255, 255, 255, 0.4); /* Brillo superior */
-  border-right: none;
-  border-bottom: none;
-
-  /* 📏 Espaciado */
+  border-top: 1px solid rgba(255,255,255,0.4);
   padding: 0 10px;
 }
 
@@ -277,117 +266,80 @@ html,body{
   gap: 3px;
   align-items: center;
   padding-left: 8px;
-  overflow-x: auto;               /* <-- permite desplazamiento si faltara espacio */
+  overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 }
 
-/* items: conservamos min-width pero permitimos estirarse hasta lo que necesite el texto */
+/* taskbar items */
 #taskbar-windows .tb-item {
   font-family: "Tahoma", sans-serif;
   font-size: 11px;
   color: white;
-
-  padding: 0 10px;                /* un poco más de padding para nombres largos */
-  min-width: 120px;               /* mantenemos el mínimo */
-  max-width: none;                /* quitamos el límite estricto */
-
+  padding: 0 10px;
+  min-width: 120px;
+  max-width: none;
   height: 27px;
-  display: inline-flex;           /* tamaño sigue al contenido */
+  display: inline-flex;
   align-items: center;
   gap: 8px;
   border-radius: 4px;
   cursor: default;
-
-  white-space: nowrap;            /* evita saltos de línea */
+  white-space: nowrap;
   overflow: visible;
-  flex: 0 0 auto;                 /* no se estira/encoge por el contenedor flex */
+  flex: 0 0 auto;
   background-color: rgb(60, 129, 243);
-
   border-top: 1px solid #5496ff;
   border-left: 1px solid #5496ff;
   border-right: 1px solid #1845a7;
   border-bottom: 1px solid #1845a7;
-
   box-shadow:
     rgba(0, 0, 0, 0.3) -1px 0px inset,
     rgba(255, 255, 255, 0.2) 1px 1px 1px inset;
 }
-
-/* asegurar que la imagen del item no se encoja */
-#taskbar-windows .tb-item img {
-  width: 16px;
-  height: 16px;
-  object-fit: contain;
-  flex: 0 0 auto;
-}
-
-/* 🔦 Efecto Hover: se ilumina sutilmente al pasar el mouse */
+#taskbar-windows .tb-item img { width: 16px; height: 16px; object-fit: contain; flex:0 0 auto; }
 #taskbar-windows .tb-item:not(.focus):hover {
-  background-color: transparent ; /* Limpia el color plano previo */
   background: linear-gradient(
     to bottom,
     #5192ff 0%,
     #4387f5 12%,
     #2d6ee6 88%,
     #3174f3 100%
-  ) ; /* Forza el degradado iluminado de XP */
-  
-  border-top: 1px solid #7aa7ff ;
-  border-left: 1px solid #7aa7ff ;
+  );
+  border-top: 1px solid #7aa7ff;
+  border-left: 1px solid #7aa7ff;
 }
-
-/* 🕵️ VENTANA ACTIVA (La que está abierta en pantalla en este momento) */
 #taskbar-windows .tb-item.focus {
-  /* 💙 El color exacto rgb(30, 82, 183) que encontraste */
   background-color: rgb(30, 82, 183);
-  background-image: none; /* Quitamos el degradado previo para usar el color plano */
-
-  /* 🧱 Bordes oscuros para el efecto hundido */
+  background-image: none;
   border-top: 1px solid #0e2b6b;
   border-left: 1px solid #0e2b6b;
   border-right: 1px solid #4784ef;
   border-bottom: 1px solid #4784ef;
-
-  /* 🎛️ La combinación de sombras múltiples que encontraste */
-  box-shadow: 
-    inset 0px 0px 1px 1px rgba(0, 0, 0, 0.2), 
+  box-shadow:
+    inset 0px 0px 1px 1px rgba(0, 0, 0, 0.2),
     inset 1px 0px 1px rgba(0, 0, 0, 0.7);
 }
 #taskbar-windows .tb-item.minimized {
-  /* Forzamos el celeste que te gustaba */
-  background-color: rgb(60, 129, 243) ;
-  background-image: none ;
-  
-  /* ⚪ Obligamos a que la letra se mantenga blanca */
-  color: white ; 
-  opacity: 1 ;
+  background-color: rgb(60, 129, 243);
+  background-image: none;
+  color: white;
+  opacity: 1;
+  border-top: 1px solid #5496ff;
+  border-left: 1px solid #5496ff;
+  border-right: 1px solid #1845a7;
+  border-bottom: 1px solid #1845a7;
+  box-shadow:
+    rgba(0, 0, 0, 0.3) -1px 0px inset,
+    rgba(255, 255, 255, 0.2) 1px 1px 1px inset;
+}
+#taskbar-windows .tb-item:active { box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.5); }
 
-  /* Devolvemos los bordes de relieve hacia afuera */
-  border-top: 1px solid #5496ff ;
-  border-left: 1px solid #5496ff ;
-  border-right: 1px solid #1845a7 ;
-  border-bottom: 1px solid #1845a7 ;
-
-  /* Devolvemos las sombras que hacen que el botón sobresalga */
-  box-shadow: 
-    rgba(0, 0, 0, 0.3) -1px 0px inset, 
-    rgba(255, 255, 255, 0.2) 1px 1px 1px inset ;
-}
-/* 👆 Efecto de click físico mantenido (Tu animación original corregida) */
-#taskbar-windows .tb-item:active {
-  /* Se elimina el padding complejo para evitar parpadeos visuales */
-  box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.5);
-}
-#taskbar-windows .tb-item img {
-  width: 16px;
-  height: 16px;
-  object-fit: contain;
-}
 /* small responsiveness */
 @media (max-width:600px){
   .window{ width:90%; height:60%; left:5%; top:10%; }
   #icons{ left:8px; top:8px; gap:12px; }
 }
+
 /* Forzar tamaño y centrado de las imágenes de iconos y evitar que el texto se superponga */
 .icon-img {
   height: 48px;
@@ -396,7 +348,6 @@ html,body{
   align-items: center;
   justify-content: center;
 }
-
 .icon-img img {
   width: 48px;
   height: 48px;
@@ -416,4 +367,55 @@ html,body{
   color: #f5f5f5;
   text-shadow: 1px 1px 0 rgba(0,0,0,0.6);
   font-size:13px;
+}
+
+/* Resizer — flush con la esquina inferior right and expanded hit area */
+.window .resizer {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  right: 0;
+  bottom: 0;
+  cursor: se-resize;
+  z-index: 9999;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%);
+  border-radius: 2px;
+  box-shadow: rgba(0,0,0,0.12) 0 1px 0 inset;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* hit area extension */
+.window .resizer::before {
+  content: '';
+  position: absolute;
+  right: -6px;
+  bottom: -6px;
+  width: 30px;
+  height: 30px;
+  background: transparent;
+  pointer-events: auto;
+}
+
+/* small visual triangle */
+.window .resizer::after{
+  content: '';
+  position: absolute;
+  right: 4px;
+  bottom: 4px;
+  width: 8px;
+  height: 8px;
+  background-image: linear-gradient(135deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.2) 100%);
+  transform: rotate(45deg);
+  opacity: 0.95;
+  border-radius: 1px;
+  pointer-events: none;
+}
+
+/* show immediate layout during resize */
+.window.resizing {
+  transition: none !important;
+  will-change: width, height;
 }
