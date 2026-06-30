@@ -12,14 +12,11 @@
 
     <div id="icons">
       <div class="icon"
-           data-window="win-resume"
+           data-window="win-projects"
            tabindex="0"
            style="left:20px; top:20px;">
         <div class="icon-img" aria-hidden="true">
            <img src="images/folder.png" alt="Projects" />
-            <rect x="6" y="18" width="52" height="34" rx="2" fill="#f5d27a" stroke="#c89f3a"/>
-            <path d="M18 18 L26 12 L56 12 L56 18 Z" fill="#f3c85c" stroke="#c89f3a"/>
-          </svg>
         </div>
         <div class="icon-label">Projects</div>
       </div>
@@ -29,30 +26,21 @@
            tabindex="0"
            style="left:20px; top:120px;">
         <div class="icon-img">
-          <svg viewBox="0 0 64 64" width="48" height="48" xmlns="http://www.w3.org/2000/svg">
-            <rect x="8" y="12" width="48" height="40" rx="2" fill="#cfe8ff" stroke="#79a8d6"/>
-            <circle cx="24" cy="30" r="4" fill="#79a8d6"/>
-            <rect x="32" y="24" width="12" height="12" fill="#79a8d6"/>
-          </svg>
+          <!-- Usamos imagen en lugar de SVG mal cerrado -->
+          <img src="images/skills.png" alt="Skills" />
         </div>
         <div class="icon-label">Skills</div>
       </div>
 
       <div class="icon"
-           data-window="win-projects"
+           data-window="win-resume"
            tabindex="0"
            style="left:20px; top:220px;">
         <div class="icon-img">
-          <svg viewBox="0 0 64 64" width="48" height="48" xmlns="http://www.w3.org/2000/svg">
-            <rect x="8" y="10" width="48" height="44" rx="2" fill="#e0f7e9" stroke="#64b27f"/>
-            <path d="M14 20 H50" stroke="#64b27f" stroke-width="2"/>
-            <path d="M14 28 H50" stroke="#64b27f" stroke-width="2"/>
-            <path d="M14 36 H50" stroke="#64b27f" stroke-width="2"/>
-          </svg>
+          <!-- Usamos imagen en lugar de SVG mal cerrado -->
+          <img src="images/notepad.png" alt="Resume" />
         </div>
-        <div class="icon-label">About Me
-        
-        </div>
+        <div class="icon-label">About Me</div>
       </div>
 
       <div class="icon"
@@ -67,8 +55,8 @@
     </div>
 
     <!-- Windows -->
-    <div class="window" id="win-projects" aria-hidden="true" role="dialog" aria-label="Projects">
-      <div class="titlebar">
+    <div class="window" id="win-projects" data-icon="images/folder.png" aria-hidden="true" role="dialog" aria-label="Projects">
+      <div class="titlebar" >
         <div class="title">Projects</div>
         <div class="controls">
           <button class="minimize" aria-label="Minimize">_</button>
@@ -76,30 +64,39 @@
         </div>
       </div>
       <div class="content">
-        <h3>Selected Projects</h3>
+        <h3>My Projects</h3>
         <ol>
-          <li><a href="#">Project One</a> — short description.</li>
-          <li><a href="#">Project Two</a> — short description.</li>
+          <li><a href="https://integradornucba-nine.vercel.app/" target="_blank">🦷 Dental Clinic Website</a> A modern and responsive website built for a real dental clinic. The project includes service information, patient access, contact sections, and a clean, professional user interface focused on accessibility and user experience.</li>
+          <li><a href="https://integradorjs-rosy.vercel.app/" target="_blank">🎮 Retro Games Store</a> An interactive e-commerce project inspired by retro gaming. Users can browse products, add items to the shopping cart, manage quantities, and complete a simulated checkout process using JavaScript.</li>
+          <li><a href="https://landingreact.vercel.app/" target="_blank">💜 Kuromi Store UI</a> A modern e-commerce interface built with React for a Kuromi merchandise store. This project showcases component-based architecture, responsive design, and attention to visual details while creating a fun and engaging user experience.</li>
         </ol>
       </div>
     </div>
 
-    <div class="window" id="win-resume" data-icon="images/folder.png" aria-hidden="true" role="dialog" aria-label="Resume">
+    <div class="window" id="win-resume" data-icon="images/notepad.png" aria-hidden="true" role="dialog" aria-label="Resume">
       <div class="titlebar">
-        <div class="title">About Me</div>
+        <div class="title">Sabrina.txt</div>
         <div class="controls">
           <button class="minimize" aria-label="Minimize">_</button>
           <button class="close" aria-label="Close">×</button>
         </div>
       </div>
       <div class="content">
-        <h2>Your Name</h2>
-        <p>Short summary or link to downloadable resume (PDF).</p>
-        <a href="#" download="Resume.pdf">Download Resume (PDF)</a>
+        <h2>Hey! I'm Sabrina 👋</h2>
+        <p>
+I'm a Front-End Developer and Medicine student with a passion for both technology and science. I love creating interactive web experiences while constantly learning new technologies.
+        </p>
+        <p>
+I'm especially interested in Artificial Intelligence and hope to build my career in AI training and related fields. I enjoy solving problems, exploring how things work, and turning ideas into projects.
+        </p>
+        <p>
+When I'm not coding or studying, you'll probably find me listening to music, spending time with animals, or learning something new.
+        </p>
       </div>
     </div>
 
-    <div class="window" id="win-skills" aria-hidden="true" role="dialog" aria-label="Skills">
+    <!-- Skills window: grid de carpetas -->
+    <div class="window" id="win-skills" data-icon="images/skills.png" aria-hidden="true" role="dialog" aria-label="Skills">
       <div class="titlebar">
         <div class="title">Skills</div>
         <div class="controls">
@@ -109,17 +106,111 @@
       </div>
       <div class="content">
         <h3>Skills</h3>
+        <p>Open a folder to see details:</p>
+
+        <div class="folder-grid" aria-hidden="false" role="list" style="display:flex;flex-wrap:wrap;gap:16px;">
+          <div class="folder" data-window="win-skills-frontend" tabindex="0" role="button" aria-label="Front-End folder" style="width:120px;text-align:center;cursor:pointer;">
+            <div class="folder-icon" aria-hidden="true" style="font-size:40px;">📁</div>
+            <div class="folder-label">Front‑End</div>
+          </div>
+
+          <div class="folder" data-window="win-skills-tools" tabindex="0" role="button" aria-label="Tools folder" style="width:120px;text-align:center;cursor:pointer;">
+            <div class="folder-icon" aria-hidden="true" style="font-size:40px;">📁</div>
+            <div class="folder-label">Tools</div>
+          </div>
+
+          <div class="folder" data-window="win-skills-learning" tabindex="0" role="button" aria-label="Learning folder" style="width:120px;text-align:center;cursor:pointer;">
+            <div class="folder-icon" aria-hidden="true" style="font-size:40px;">📁</div>
+            <div class="folder-label">Learning</div>
+          </div>
+
+          <div class="folder" data-window="win-skills-soft" tabindex="0" role="button" aria-label="Soft Skills folder" style="width:120px;text-align:center;cursor:pointer;">
+            <div class="folder-icon" aria-hidden="true" style="font-size:40px;">📁</div>
+            <div class="folder-label">Soft Skills</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sub-windows para cada carpeta de Skills -->
+    <div class="window" id="win-skills-frontend" data-icon="images/folder.png" aria-hidden="true" role="dialog" aria-label="Front-End Skills">
+      <div class="titlebar">
+        <div class="title">Front‑End</div>
+        <div class="controls">
+          <button class="minimize" aria-label="Minimize">_</button>
+          <button class="close" aria-label="Close">×</button>
+        </div>
+      </div>
+      <div class="content">
+        <h4>Front‑End</h4>
         <ul>
-          <li>HTML / CSS / JavaScript</li>
-          <li>React / Vue</li>
-          <li>Node.js / Express</li>
-          <li>Design & UX</li>
+          <li>HTML / Semántica & accesibilidad</li>
+          <li>CSS (Flexbox, Grid, Responsive)</li>
+          <li>JavaScript (ES6+)</li>
+          <li>Frameworks: React / Vue</li>
+          <li>Testing & debugging</li>
         </ul>
       </div>
     </div>
 
+    <div class="window" id="win-skills-tools" data-icon="images/tools.png" aria-hidden="true" role="dialog" aria-label="Tools">
+      <div class="titlebar">
+        <div class="title">Tools</div>
+        <div class="controls">
+          <button class="minimize" aria-label="Minimize">_</button>
+          <button class="close" aria-label="Close">×</button>
+        </div>
+      </div>
+      <div class="content">
+        <h4>Tools</h4>
+        <ul>
+          <li>Git / GitHub</li>
+          <li>npm / yarn</li>
+          <li>Build tools (webpack, vite)</li>
+          <li>Design: Figma / FigJam</li>
+        </ul>
+      </div>
+    </div>
 
-    <div class="window" id="win-contact" aria-hidden="true" role="dialog" aria-label="Contact">
+    <div class="window" id="win-skills-learning" data-icon="images/learning.png" aria-hidden="true" role="dialog" aria-label="Learning">
+      <div class="titlebar">
+        <div class="title">Learning</div>
+        <div class="controls">
+          <button class="minimize" aria-label="Minimize">_</button>
+          <button class="close" aria-label="Close">×</button>
+        </div>
+      </div>
+      <div class="content">
+        <h4>Learning</h4>
+        <ul>
+          <li>TypeScript</li>
+          <li>Progressive Web Apps</li>
+          <li>Testing (Jest, React Testing Library)</li>
+          <li>Performance & Accessibility</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="window" id="win-skills-soft" data-icon="images/softskills.png" aria-hidden="true" role="dialog" aria-label="Soft Skills">
+      <div class="titlebar">
+        <div class="title">Soft Skills</div>
+        <div class="controls">
+          <button class="minimize" aria-label="Minimize">_</button>
+          <button class="close" aria-label="Close">×</button>
+        </div>
+      </div>
+      <div class="content">
+        <h4>Soft Skills</h4>
+        <ul>
+          <li>Comunicación</li>
+          <li>Trabajo en equipo</li>
+          <li>Gestión del tiempo</li>
+          <li>Resolución de problemas</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="window" id="win-contact" data-icon="images/messenger.png" aria-hidden="true" role="dialog" aria-label="Contact">
       <div class="titlebar">
         <div class="title">Contact</div>
         <div class="controls">
@@ -137,9 +228,9 @@
     <!-- Taskbar -->
     <div id="taskbar">
       <button id="start-btn">
-  <img src="/images/pink windows icon.png" />
-  <span>start</span>
-</button>
+        <img src="images/pink windows icon.png" />
+        <span>start</span>
+      </button>
       <div id="taskbar-windows"></div>
       <div id="clock"></div>
     </div>

@@ -272,4 +272,39 @@
       icon.addEventListener('pointerup', onPointerUp);
     });
   })();
+
+  // ==========================
+  // Carpetas dentro de Skills: doble-click y teclado (Enter/Space) para abrir sub-windows
+  // ==========================
+  (function(){
+    const folders = document.querySelectorAll('.folder');
+    if (!folders || folders.length === 0) return;
+
+    folders.forEach(folder => {
+      // ignorar dblclick si hubiera drag (consistente con icons)
+      folder._wasMoved = false;
+
+      folder.addEventListener('dblclick', (e) => {
+        if (folder._wasMoved) {
+          e.stopImmediatePropagation();
+          return;
+        }
+        const id = folder.dataset.window;
+        if (id && typeof openWindow === 'function') openWindow(id);
+      });
+
+      // teclado: Enter abre, Space también (comportamiento accesible)
+      folder.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          const id = folder.dataset.window;
+          if (id && typeof openWindow === 'function') openWindow(id);
+        }
+      });
+
+      // pequeño UX: cursor pointer (si el CSS no lo pone)
+      folder.style.cursor = 'pointer';
+    });
+  })();
+
 })();
