@@ -414,8 +414,20 @@ html,body{
   pointer-events: none;
 }
 
-/* show immediate layout during resize */
-.window.resizing {
-  transition: none !important;
-  will-change: width, height;
+/* Title icon (small) — muestra el icono de la ventana al lado del título */
+.titlebar .title {
+  display: flex;
+  align-items: center;
+  gap: 0.6em;        /* separación entre icono y texto */
+  font-size: 13px;   /* coincide con el tamaño que ya usabas */
+}
+
+.titlebar .title .title-icon {
+  width: 1em;        /* igual a la altura de la fuente */
+  height: 1em;
+  display: inline-block;
+  object-fit: contain;
+  flex: 0 0 1em;     /* no se estira */
+  border-radius: 2px; /* opcional, quita si no querés borde */
+  filter: none;      /* evita que reglas globales lo modifiquen */
 }

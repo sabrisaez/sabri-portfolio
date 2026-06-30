@@ -68,23 +68,54 @@
 
   // ---------- Helper: center a window in the viewport ----------
   function centerWindow(win){
-    // attempt to get current width/height (style or computed)
+    if(!win) return;
     let w = parseInt(win.style.width, 10);
     let h = parseInt(win.style.height, 10);
     if (!w || isNaN(w)) w = Math.round(win.getBoundingClientRect().width) || 420;
     if (!h || isNaN(h)) h = Math.round(win.getBoundingClientRect().height) || 300;
     const left = Math.max(8, Math.round((window.innerWidth - w) / 2));
-    const top = Math.max(8, Math.round((window.innerHeight - h) / 2) - 20); // slight visual up
+    const top = Math.max(8, Math.round((window.innerHeight - h) / 2) - 20);
     win.style.left = left + 'px';
     win.style.top = top + 'px';
   }
+
+  // ---------- Persist window size/pos ----------
+  function persistWindowState(win){
+    try {
+      const stored = readStorage();
+      const id = win.id;
+      if (!id) return;
+      const left = Math.round(parseFloat(win.style.left || win.getBoundingClientRect().left) || 0);
+      const top = Math.round(parseFloat(win.style.top || win.getBoundingClientRect().top) || 0);
+      const width = Math.round(parseFloat(win.style.width || win.getBoundingClientRect().width) || 0);
+      const height = Math.round(parseFloat(win.style.height || win.getBoundingClientRect().height) || 0);
+      stored[id] = { x: left, y: top };
+      stored[id + '_size'] = { w: width, h: height };
+      writeStorage(stored);
+    } catch(e){}
+  }
+
+  // ---------- Apply saved windows sizes / positions on load ----------
+  (function applySavedWindowStates(){
+    const stored = readStorage();
+    windows.forEach(win => {
+      try {
+        const pos = stored[win.id];
+        if (pos && typeof pos.x === 'number') win.style.left = pos.x + 'px';
+        if (pos && typeof pos.y === 'number') win.style.top = pos.y + 'px';
+        const size = stored[win.id + '_size'];
+        if (size && typeof size.w === 'number') win.style.width = size.w + 'px';
+        if (size && typeof size.h === 'number') win.style.height = size.h + 'px';
+      } catch(e){}
+    });
+  })();
 
   // ---------- Open/Close windows (center on open and guard against immediate drag) ----------
   const openWindow = function(id){
     const win = document.getElementById(id);
     if (!win) return;
 
-    // center the window when opening (user requested "center on open")
+    // center the window when opening
     centerWindow(win);
 
     // mark just opened to prevent immediate accidental drag
@@ -120,37 +151,6 @@
     icon.addEventListener('keydown', (e)=> { if(e.key === 'Enter') openWindow(icon.dataset.window); });
   });
 
-  // ---------- Persist window size/pos ----------
-  function persistWindowState(win){
-    try {
-      const stored = readStorage();
-      const id = win.id;
-      if (!id) return;
-      const left = Math.round(parseFloat(win.style.left || win.getBoundingClientRect().left) || 0);
-      const top = Math.round(parseFloat(win.style.top || win.getBoundingClientRect().top) || 0);
-      const width = Math.round(parseFloat(win.style.width || win.getBoundingClientRect().width) || 0);
-      const height = Math.round(parseFloat(win.style.height || win.getBoundingClientRect().height) || 0);
-      stored[id] = { x: left, y: top };
-      stored[id + '_size'] = { w: width, h: height };
-      writeStorage(stored);
-    } catch(e){}
-  }
-
-  // ---------- Apply saved windows sizes / positions on load (but we will still center on open) ----------
-  (function applySavedWindowStates(){
-    const stored = readStorage();
-    windows.forEach(win => {
-      try {
-        const pos = stored[win.id];
-        if (pos && typeof pos.x === 'number') win.style.left = pos.x + 'px';
-        if (pos && typeof pos.y === 'number') win.style.top = pos.y + 'px';
-        const size = stored[win.id + '_size'];
-        if (size && typeof size.w === 'number') win.style.width = size.w + 'px';
-        if (size && typeof size.h === 'number') win.style.height = size.h + 'px';
-      } catch(e){}
-    });
-  })();
-
   // ---------- Window controls, drag and resize ----------
   document.querySelectorAll('.window').forEach(win=>{
     const closeBtn = win.querySelector('.close');
@@ -165,7 +165,7 @@
       if (tbBtn) { tbBtn.classList.add('minimized'); tbBtn.classList.remove('focus'); }
     });
 
-    // ensure resizer exists
+    // ensure resizer exists (create if missing)
     if (!win.querySelector('.resizer')) {
       const r = document.createElement('div');
       r.className = 'resizer';
@@ -216,7 +216,7 @@
       window.addEventListener('pointerup', onPointerUp);
     }
 
-    // resizing via resizer (bottom-right)
+    // resizing via .resizer (bottom-right corner)
     const resizer = win.querySelector('.resizer');
     if (resizer) {
       let resizing = false;
@@ -244,6 +244,7 @@
         const dy = e.clientY - startY;
         let newW = Math.max(minW, Math.round(startW + dx));
         let newH = Math.max(minH, Math.round(startH + dy));
+        // clamp so window doesn't extend beyond viewport
         const winLeft = parseInt(win.style.left || win.getBoundingClientRect().left, 10) || 0;
         const winTop = parseInt(win.style.top || win.getBoundingClientRect().top, 10) || 0;
         newW = Math.min(newW, Math.max(200, window.innerWidth - winLeft - 8));
@@ -267,7 +268,7 @@
     }
   });
 
-  // ---------- Taskbar items (ensure restore goes through openWindow so it centers) ----------
+  // ---------- Taskbar items ----------
   function addTaskbarItem(id, win){
     if (!taskbar) return;
     let existing = taskbar.querySelector(`[data-win="${id}"]`);
@@ -288,7 +289,6 @@
       const isMinimized = win.style.display === 'none' || win.getAttribute('aria-hidden') === 'true';
       const isFocused = btn.classList.contains('focus');
       if (isMinimized || !isFocused) {
-        // use openWindow to ensure centering behavior
         openWindow(id);
       } else {
         win.style.display = 'none';
@@ -301,7 +301,6 @@
 
     taskbar.appendChild(btn);
   }
-
   function removeTaskbarItem(id){
     if (!taskbar) return;
     const el = taskbar.querySelector(`[data-win="${id}"]`);
@@ -408,5 +407,28 @@
       folder.style.cursor = 'pointer';
     });
   })();
+// Insertar iconitos pequeños en la titlebar basados en data-icon de cada .window
+(function addTitleIcons(){
+  document.querySelectorAll('.window').forEach(function(win){
+    try {
+      var iconSrc = win.dataset && win.dataset.icon;
+      if (!iconSrc) return;
+      var titleEl = win.querySelector('.title');
+      if (!titleEl) return;
+      if (titleEl.querySelector('.title-icon')) return; // ya insertado
 
+      var img = document.createElement('img');
+      img.className = 'title-icon';
+      img.src = iconSrc;
+      img.alt = '';
+      img.setAttribute('aria-hidden','true');
+
+      // insertar al inicio del título
+      titleEl.insertBefore(img, titleEl.firstChild);
+    } catch (err) {
+      // no rompemos nada si falla
+      console.warn('addTitleIcons error', win.id, err);
+    }
+  });
+})();
 })();
