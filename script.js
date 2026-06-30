@@ -5,6 +5,18 @@
   const taskbar = document.getElementById('taskbar-windows');
   const clock = document.getElementById('clock');
 
+  // 🛠️ CORRECCIÓN 1: Movida aquí arriba para que el resto del script la reconozca desde el inicio
+  function updateTaskbarFocus(activeWindowId) {
+    taskbar.querySelectorAll('.tb-item').forEach(btn => {
+      if (btn.dataset.win === activeWindowId) {
+        btn.classList.add('focus');
+        btn.classList.remove('minimized'); 
+      } else {
+        btn.classList.remove('focus');
+      }
+    });
+  }
+
   // simple z-index tracker attached to the openWindow function (we'll define the function next)
   const openWindow = function(id){
     const win = document.getElementById(id);
@@ -13,11 +25,13 @@
     openWindow.topZ = (openWindow.topZ || 20) + 1;
     win.style.zIndex = openWindow.topZ;
     win.setAttribute('aria-hidden','false');
+    
     // si ya existe el botón en taskbar, actualizar su estado (restaurar visual)
     const tbBtn = taskbar.querySelector(`[data-win="${id}"]`);
     if (tbBtn) tbBtn.classList.remove('minimized');
     win.dataset.minimized = 'false';
     addTaskbarItem(id, win);
+    updateTaskbarFocus(id);
   };
   openWindow.topZ = 20;
 
@@ -55,11 +69,14 @@
       win.setAttribute('aria-hidden','true');
       win.dataset.minimized = 'true';
       const tbBtn = taskbar.querySelector(`[data-win="${win.id}"]`);
-      if (tbBtn) tbBtn.classList.add('minimized');
+      if (tbBtn) {
+        tbBtn.classList.add('minimized');
+        tbBtn.classList.remove('focus'); // 🛠️ CORRECCIÓN 2: Quitar foco al minimizar desde la ventana
+      }
     });
 
     // clicking window brings to front
-    win.addEventListener('pointerdown', ()=> { openWindow.topZ = (openWindow.topZ || 20) + 1; win.style.zIndex = openWindow.topZ; });
+    win.addEventListener('pointerdown', ()=> { openWindow.topZ = (openWindow.topZ || 20) + 1; win.style.zIndex = openWindow.topZ; updateTaskbarFocus(win.id); });
 
     // dragging window using pointer events
     const title = win.querySelector('.titlebar');
@@ -80,6 +97,7 @@
       offsetY = e.clientY - win.offsetTop;
       title.setPointerCapture && title.setPointerCapture(e.pointerId);
       document.body.style.userSelect = 'none';
+      updateTaskbarFocus(win.id);
     };
     const onPointerMove = (e) => {
       if(!dragging) return;
@@ -101,12 +119,10 @@
     window.addEventListener('pointerup', onPointerUp);
   });
 
-  // taskbar items: one per open window
+   // taskbar items: one per open window
   function addTaskbarItem(id, win){
-    // si ya existe, solo nos aseguramos de actualizar su texto y estado
     let existing = taskbar.querySelector(`[data-win="${id}"]`);
     if (existing) {
-      // si la ventana está visible, quitar clase minimized
       if (win.style.display !== 'none' && win.getAttribute('aria-hidden') !== 'true') {
         existing.classList.remove('minimized');
       }
@@ -114,40 +130,61 @@
     }
     const btn = document.createElement('button');
     btn.className = 'tb-item';
-    btn.textContent = win.querySelector('.title').textContent;
     btn.dataset.win = id;
+
+    // 🛠️ AGREGA EL ÍCONO DE FORMA DINÁMICA
+    // Lee la ruta de la imagen desde el HTML de tu ventana. Si no encuentra ninguna, usa una por defecto.
+    const iconSrc = win.dataset.icon || 'images/default-icon.png'; 
+    
+    const img = document.createElement('img');
+    img.src = iconSrc;
+    img.alt = '';
+    
+    const span = document.createElement('span');
+    span.textContent = win.querySelector('.title').textContent;
+
+    // Metemos primero la imagen y luego el texto adentro del botón
+    btn.appendChild(img);
+    btn.appendChild(span);
+    
     btn.addEventListener('click', ()=>{
-      // toggle minimize/restore
-      if(win.style.display === 'none' || win.getAttribute('aria-hidden') === 'true') {
-        // restaurar
+      const isMinimized = win.style.display === 'none' || win.getAttribute('aria-hidden') === 'true';
+      const isFocused = btn.classList.contains('focus');
+
+      if (isMinimized || !isFocused) {
         win.style.display = 'block';
         win.setAttribute('aria-hidden','false');
         win.dataset.minimized = 'false';
         openWindow.topZ = (openWindow.topZ || 20) + 1;
         win.style.zIndex = openWindow.topZ;
-        btn.classList.remove('minimized');
+        updateTaskbarFocus(id); 
       } else {
-        // minimizar (ocultar) pero mantener botón en taskbar
         win.style.display = 'none';
         win.setAttribute('aria-hidden','true');
         win.dataset.minimized = 'true';
         btn.classList.add('minimized');
+        btn.classList.remove('focus'); 
       }
     });
+    
     taskbar.appendChild(btn);
   }
+
   function removeTaskbarItem(id){
     const el = taskbar.querySelector(`[data-win="${id}"]`);
     if(el) el.remove();
   }
-
   // simple clock
   function updateClock(){
     const d = new Date();
-    const h = String(d.getHours()).padStart(2,'0');
+    let h = d.getHours();
     const m = String(d.getMinutes()).padStart(2,'0');
-    clock.textContent = `${h}:${m}`;
+    const ampm = h >= 12 ? 'PM' : 'AM';
+    h = h % 12;
+    h = h ? h : 12; // convierte 0 en 12
+    clock.textContent = `${h}:${m} ${ampm}`;
   }
+
   setInterval(updateClock,1000);
   updateClock();
 
@@ -165,7 +202,6 @@
         icon.style.left = positions[id].x + 'px';
         icon.style.top = positions[id].y + 'px';
       }
-      // inicializamos bandera
       icon._wasMoved = false;
     });
 
@@ -189,7 +225,6 @@
         iconStartLeft = parseInt(getComputedStyle(icon).left, 10) || 0;
         iconStartTop = parseInt(getComputedStyle(icon).top, 10) || 0;
 
-        // bring to front visually
         icon.style.zIndex = (openWindow.topZ || 100) + 1;
         openWindow.topZ = parseInt(icon.style.zIndex, 10);
 
@@ -220,30 +255,21 @@
         icon.classList.remove('dragging');
         icon.releasePointerCapture && icon.releasePointerCapture(e.pointerId);
 
-        if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
-
         if (moved) {
           icon._wasMoved = true;
-          setTimeout(() => { icon._wasMoved = false; }, 400);
-        }
-
-        // guardar posición
-        const id = icon.dataset.window || icon.getAttribute('id') || null;
-        if (id) {
-          positions[id] = {
-            x: parseInt(icon.style.left, 10) || 0,
-            y: parseInt(icon.style.top, 10) || 0
-          };
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(positions));
+          setTimeout(() => { icon._wasMoved = false; }, 50);
+          
+          const id = icon.dataset.window || icon.getAttribute('id') || null;
+          if (id) {
+            positions[id] = { x: parseInt(icon.style.left), y: parseInt(icon.style.top) };
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(positions));
+          }
         }
       };
 
       icon.addEventListener('pointerdown', onPointerDown);
-      window.addEventListener('pointermove', onPointerMove);
-      window.addEventListener('pointerup', onPointerUp);
-
-      // Si el icono tiene un dblclick listener ya añadido arriba, la bandera icon._wasMoved evitará la apertura si se movió.
+      icon.addEventListener('pointermove', onPointerMove);
+      icon.addEventListener('pointerup', onPointerUp);
     });
   })();
-
 })();
