@@ -270,42 +270,55 @@ html,body{
   padding: 0 10px;
 }
 
+/* permitir scroll horizontal en la zona de items */
 #taskbar-windows {
   flex: 1;
   display: flex;
   gap: 3px;
   align-items: center;
   padding-left: 8px;
+  overflow-x: auto;               /* <-- permite desplazamiento si faltara espacio */
+  -webkit-overflow-scrolling: touch;
 }
 
+/* items: conservamos min-width pero permitimos estirarse hasta lo que necesite el texto */
 #taskbar-windows .tb-item {
   font-family: "Tahoma", sans-serif;
   font-size: 11px;
   color: white;
 
-  padding: 0 8px; /* Ajuste para mantener alineación exacta */
-  min-width: 120px;
-  max-width: 150px; /* Evita que las ventanas se estiren demasiado */
-  height: 27px;
+  padding: 0 10px;                /* un poco más de padding para nombres largos */
+  min-width: 120px;               /* mantenemos el mínimo */
+  max-width: none;                /* quitamos el límite estricto */
 
-  display: flex;
+  height: 27px;
+  display: inline-flex;           /* tamaño sigue al contenido */
   align-items: center;
-  gap: 5px; /* Espacio ideal si agregás un ícono de la app */
-  border-radius: 4px; /* Pequeño redondeado original de XP */
+  gap: 8px;
+  border-radius: 4px;
   cursor: default;
 
-    background-color: rgb(60, 129, 243);
+  white-space: nowrap;            /* evita saltos de línea */
+  overflow: visible;
+  flex: 0 0 auto;                 /* no se estira/encoge por el contenedor flex */
+  background-color: rgb(60, 129, 243);
 
-  /* 🧱 Bordes base de la barra */
   border-top: 1px solid #5496ff;
   border-left: 1px solid #5496ff;
   border-right: 1px solid #1845a7;
   border-bottom: 1px solid #1845a7;
 
-  /* 🎛️ Las sombras del otro proyecto para el efecto de relieve hacia afuera */
-  box-shadow: 
-    rgba(0, 0, 0, 0.3) -1px 0px inset, 
+  box-shadow:
+    rgba(0, 0, 0, 0.3) -1px 0px inset,
     rgba(255, 255, 255, 0.2) 1px 1px 1px inset;
+}
+
+/* asegurar que la imagen del item no se encoja */
+#taskbar-windows .tb-item img {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  flex: 0 0 auto;
 }
 
 /* 🔦 Efecto Hover: se ilumina sutilmente al pasar el mouse */
@@ -374,4 +387,33 @@ html,body{
 @media (max-width:600px){
   .window{ width:90%; height:60%; left:5%; top:10%; }
   #icons{ left:8px; top:8px; gap:12px; }
+}
+/* Forzar tamaño y centrado de las imágenes de iconos y evitar que el texto se superponga */
+.icon-img {
+  height: 48px;
+  line-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-img img {
+  width: 48px;
+  height: 48px;
+  display: block;
+  object-fit: contain;
+}
+
+/* Reducimos el gap entre imagen y texto para que estén más cerca */
+.icon-label {
+  display: block;
+  margin-top: 4px; /* antes 6px, ahora 4px para acercar label al icon */
+  text-align: center;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #f5f5f5;
+  text-shadow: 1px 1px 0 rgba(0,0,0,0.6);
+  font-size:13px;
 }

@@ -11,6 +11,28 @@
     <div class="wallpaper"></div>
 
     <div id="icons">
+      <!-- System icon -->
+      <div class="icon"
+           data-window="win-system"
+           tabindex="0"
+           style="left:100px; top:20px;">
+        <div class="icon-img" aria-hidden="true">
+           <img src="images/system.png" alt="System" />
+        </div>
+        <div class="icon-label">System</div>
+      </div>
+
+      <!-- Resume icon (PDF) -> data-window="win-resume" -->
+      <div class="icon"
+           data-window="win-resume"
+           tabindex="0"
+           style="left:180px; top:20px;">
+        <div class="icon-img" aria-hidden="true">
+           <img src="images/resume.png" alt="Resume" />
+        </div>
+        <div class="icon-label">Resume</div>
+      </div>
+
       <div class="icon"
            data-window="win-projects"
            tabindex="0"
@@ -26,19 +48,18 @@
            tabindex="0"
            style="left:20px; top:120px;">
         <div class="icon-img">
-          <!-- Usamos imagen en lugar de SVG mal cerrado -->
           <img src="images/skills.png" alt="Skills" />
         </div>
         <div class="icon-label">Skills</div>
       </div>
 
+      <!-- About Me icon -> data-window="win-about" -->
       <div class="icon"
-           data-window="win-resume"
+           data-window="win-about"
            tabindex="0"
            style="left:20px; top:220px;">
         <div class="icon-img">
-          <!-- Usamos imagen en lugar de SVG mal cerrado -->
-          <img src="images/notepad.png" alt="Resume" />
+          <img src="images/notepad.png" alt="About Me" />
         </div>
         <div class="icon-label">About Me</div>
       </div>
@@ -55,6 +76,45 @@
     </div>
 
     <!-- Windows -->
+    <div class="window" id="win-system" data-icon="images/system.png" aria-hidden="true" role="dialog" aria-label="System - Developer Edition">
+      <div class="titlebar">
+        <div class="title">System — Developer Edition</div>
+        <div class="controls">
+          <button class="minimize" aria-label="Minimize">_</button>
+          <button class="close" aria-label="Close">×</button>
+        </div>
+      </div>
+      <div class="content">
+        <h3>Developer Edition</h3>
+        <p><strong>Version</strong><br>1.0</p>
+        <p><strong>Experience</strong><br>Junior</p>
+        <p><strong>Languages</strong><br>Spanish · English</p>
+        <p><strong>Location</strong><br>Buenos Aires</p>
+        <p><strong>Status</strong><br>Available for Work</p>
+      </div>
+    </div>
+
+    <!-- Resume window (PDF) ahora id="win-resume" -->
+    <div class="window" id="win-resume" data-icon="images/resume.png" aria-hidden="true" role="dialog" aria-label="Resume">
+      <div class="titlebar">
+        <div class="title">Resume — Sabrina</div>
+        <div class="controls">
+          <button class="minimize" aria-label="Minimize">_</button>
+          <button class="close" aria-label="Close">×</button>
+        </div>
+      </div>
+      <div class="content" style="display:flex;flex-direction:column;height:100%;">
+        <div style="flex:0 0 auto;margin-bottom:8px;">
+          <a href="files/Sabrina_Resume.pdf" target="_blank" download="Sabrina_Resume.pdf">Download Resume (PDF)</a>
+        </div>
+        <div style="flex:1 1 auto; min-height:0;">
+          <iframe src="files/Sabrina_Resume.pdf" width="100%" height="100%" style="border:0;" title="Resume PDF">
+            <p>Your browser does not support inline PDF viewing. <a href="files/Sabrina_Resume.pdf" target="_blank">Click here to download the Resume</a>.</p>
+          </iframe>
+        </div>
+      </div>
+    </div>
+
     <div class="window" id="win-projects" data-icon="images/folder.png" aria-hidden="true" role="dialog" aria-label="Projects">
       <div class="titlebar" >
         <div class="title">Projects</div>
@@ -73,7 +133,8 @@
       </div>
     </div>
 
-    <div class="window" id="win-resume" data-icon="images/notepad.png" aria-hidden="true" role="dialog" aria-label="Resume">
+    <!-- About Me window ahora id="win-about" -->
+    <div class="window" id="win-about" data-icon="images/notepad.png" aria-hidden="true" role="dialog" aria-label="About Me">
       <div class="titlebar">
         <div class="title">Sabrina.txt</div>
         <div class="controls">
