@@ -1,5 +1,7 @@
 // script.js — icons layout, windows (move/resize), taskbar and persistence
-
+document.querySelectorAll(".window").forEach(w => {
+  w.style.display = "none";
+});
 // ---------- Fix image paths for GitHub Pages ----------
 (function fixImagePaths() {
   const BASE_PATH = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
@@ -179,6 +181,13 @@
     updateTaskbarFocus(id);
   };
   openWindow.topZ = 20;
+
+document.querySelectorAll('.menu-option.exit').forEach(option => {
+    option.addEventListener('click', () => {
+        const windowEl = option.closest('.window');
+        closeWindow(windowEl.id);
+    });
+});
 
   // Expose openWindow globally for Start Menu
   window.openWindowFunc = openWindow;
