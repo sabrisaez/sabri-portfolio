@@ -717,3 +717,151 @@ linear-gradient(
   gap: 0;
   padding: 2px 0;
 }
+/* Notepad Menu Styling */
+.notepad-menu {
+  background: #EDEAD6;
+  border-top: 1px solid #dfdfdf;
+  border-bottom: 1px solid #808080;
+  padding: 2px;
+  display: flex;
+  gap: 0;
+}
+
+/* Notepad window styling */
+#win-about .content {
+  display: flex;
+  flex-direction: column;
+}
+
+#win-about {
+  display: flex;
+  flex-direction: column;
+}
+
+#win-about .titlebar {
+  flex: 0 0 auto;
+}
+
+#win-about .notepad-menu {
+  flex: 0 0 auto;
+}
+
+.menu-dropdown {
+  position: relative;
+}
+
+.notepad-menu .menu-item {
+  background: transparent;
+  border: 1px solid transparent;
+  color: #000000;
+  font-family: Tahoma, sans-serif;
+  font-size: 11px;
+  padding: 4px 8px;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.1s ease;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.notepad-menu .menu-item:hover {
+  background: #c0c0c0;
+  border: 1px solid #ffffff #808080 #808080 #ffffff;
+  box-shadow: inset 1px 1px 0 #ffffff, inset -1px -1px 0 #808080;
+}
+
+.notepad-menu .menu-item:active {
+  background: #c0c0c0;
+  border: 1px solid #808080 #ffffff #ffffff #808080;
+  box-shadow: inset 1px 1px 0 #808080, inset -1px -1px 0 #ffffff;
+}
+
+/* Menu popup */
+.menu-popup {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #c0c0c0;
+  border: 2px solid;
+  border-color: #ffffff #808080 #808080 #ffffff;
+  box-shadow: 1px 1px 0 rgba(0,0,0,0.3), inset 1px 1px 0 rgba(255,255,255,0.7);
+  z-index: 1000;
+  min-width: 180px;
+  padding: 2px 0;
+  margin-top: 0;
+}
+
+.menu-dropdown:hover .menu-popup,
+.menu-dropdown:focus-within .menu-popup {
+  display: block;
+}
+
+.menu-option {
+  padding: 4px 24px 4px 16px;
+  color: #000000;
+  font-family: Tahoma, sans-serif;
+  font-size: 11px;
+  cursor: pointer;
+  background: #c0c0c0;
+  white-space: nowrap;
+  user-select: none;
+  transition: all 0.1s ease;
+}
+
+.menu-option:hover {
+  background: #000080;
+  color: #ffffff;
+}
+
+.menu-option:active {
+  background: #000080;
+  color: #ffffff;
+}
+
+.menu-separator {
+  height: 2px;
+  background: linear-gradient(to right, #dfdfdf 0%, #808080 100%);
+  margin: 2px 0;
+}
+
+.menu-option.disabled {
+  color: #808080;
+  cursor: not-allowed;
+}
+
+.menu-option.disabled:hover {
+  background: #c0c0c0;
+  color: #808080;
+}
+
+/* Notepad content adjustments */
+.notepad-content {
+  background: white;
+  padding: 16px;
+  overflow: auto;
+  font-family: Courier New, monospace;
+  font-size: 13px;
+  line-height: 1.6;
+  flex: 1;
+  min-height: 0;
+}
+
+.notepad-content h2 {
+  font-family: Tahoma, sans-serif;
+  font-size: 16px;
+  margin-top: 0;
+  margin-bottom: 12px;
+}
+
+.notepad-content p {
+  margin: 0 0 12px;
+  text-align: justify;
+  color: #000000;
+}
+
+.notepad-content p:last-child {
+  margin-bottom: 0;
+}

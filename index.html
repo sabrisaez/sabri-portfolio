@@ -203,34 +203,98 @@
     </div>
 
     <!-- About Me window -->
-    <div class="window" id="win-about" data-icon="images/notepad.png" aria-hidden="true" role="dialog" aria-label="About Me">
-      <div class="titlebar">
-        <div class="title">Sabrina.txt</div>
-        <div class="controls">
-          <button class="minimize" aria-label="Minimize" title="Minimize">
-            <img src="images/minimize.png" alt="" />
-          </button>
-          <button class="maximize" aria-label="Maximize" title="Maximize">
-            <img src="images/maximize.png" alt="" />
-          </button>
-          <button class="close" aria-label="Close" title="Close">
-            <img src="images/exit.png" alt="" />
-          </button>
-        </div>
-      </div>
-      <div class="content">
-        <h2>Hey! I'm Sabrina 👋</h2>
-        <p>
-          I'm a Front-End Developer and Medicine student with a passion for both technology and science. I love creating interactive web experiences while constantly learning new technologies.
-        </p>
-        <p>
-          I'm especially interested in Artificial Intelligence and hope to build my career in AI training and related fields. I enjoy solving problems, exploring how things work, and turning ideas into projects.
-        </p>
-        <p>
-          When I'm not coding or studying, you'll probably find me listening to music, spending time with animals, or learning something new.
-        </p>
+<div class="window" id="win-about" data-icon="images/notepad.png" aria-hidden="true" role="dialog" aria-label="About Me">
+  <div class="titlebar">
+    <div class="title">Sabrina.txt</div>
+    <div class="controls">
+      <button class="minimize" aria-label="Minimize" title="Minimize">
+        <img src="images/minimize.png" alt="" />
+      </button>
+      <button class="maximize" aria-label="Maximize" title="Maximize">
+        <img src="images/maximize.png" alt="" />
+      </button>
+      <button class="close" aria-label="Close" title="Close">
+        <img src="images/exit.png" alt="" />
+      </button>
+    </div>
+  </div>
+  
+  <!-- Notepad Menu bar with dropdowns -->
+  <div class="notepad-menu">
+    <div class="menu-dropdown">
+      <button class="menu-item">File</button>
+      <div class="menu-popup">
+        <div class="menu-option">New</div>
+        <div class="menu-option">Open...</div>
+        <div class="menu-option">Save</div>
+        <div class="menu-option">Save As...</div>
+        <div class="menu-separator"></div>
+        <div class="menu-option">Page Setup...</div>
+        <div class="menu-option">Print...</div>
+        <div class="menu-separator"></div>
+        <div class="menu-option">Exit</div>
       </div>
     </div>
+
+    <div class="menu-dropdown">
+      <button class="menu-item">Edit</button>
+      <div class="menu-popup">
+        <div class="menu-option">Undo...</div>
+        <div class="menu-separator"></div>
+        <div class="menu-option">Cut</div>
+        <div class="menu-option">Copy</div>
+        <div class="menu-option">Paste</div>
+        <div class="menu-option">Delete</div>
+        <div class="menu-separator"></div>
+        <div class="menu-option">Find...</div>
+        <div class="menu-option">Find Next</div>
+        <div class="menu-option">Replace...</div>
+        <div class="menu-option">Go To...</div>
+        <div class="menu-separator"></div>
+        <div class="menu-option">Select All</div>
+        <div class="menu-option">Time/Date</div>
+      </div>
+    </div>
+
+    <div class="menu-dropdown">
+      <button class="menu-item">Format</button>
+      <div class="menu-popup">
+        <div class="menu-option">Word Wrap</div>
+        <div class="menu-option">Font...</div>
+      </div>
+    </div>
+
+    <div class="menu-dropdown">
+      <button class="menu-item">View</button>
+      <div class="menu-popup">
+        <div class="menu-option">Status Bar</div>
+      </div>
+    </div>
+
+    <div class="menu-dropdown">
+      <button class="menu-item">Help</button>
+      <div class="menu-popup">
+        <div class="menu-option">Help Topics</div>
+        <div class="menu-separator"></div>
+        <div class="menu-option">About Notepad</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="content notepad-content">
+    <h2>Hey! I'm Sabrina 👋</h2>
+    <p>
+      I'm a Front-End Developer and Medicine student with a passion for both technology and science. I love creating interactive web experiences while constantly learning new technologies.
+    </p>
+    <p>
+      I'm especially interested in Artificial Intelligence and hope to build my career in AI training and related fields. I enjoy solving problems, exploring how things work, and turning ideas into projects.
+    </p>
+    <p>
+      When I'm not coding or studying, you'll probably find me listening to music, spending time with animals, or learning something new.
+    </p>
+  </div>
+</div>
 
     <!-- Skills window: grid de carpetas -->
     <div class="window" id="win-skills" data-icon="images/skills.png" aria-hidden="true" role="dialog" aria-label="Skills">
