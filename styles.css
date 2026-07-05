@@ -720,9 +720,9 @@ linear-gradient(
 /* Notepad Menu Styling */
 .notepad-menu {
   background: #EDEAD6;
-  border-top: 1px solid #dfdfdf;
+
   border-bottom: 1px solid #808080;
-  padding: 2px;
+
   display: flex;
   gap: 0;
 }
@@ -756,7 +756,7 @@ linear-gradient(
   color: #000000;
   font-family: Tahoma, sans-serif;
   font-size: 11px;
-  padding: 4px 8px;
+
   cursor: pointer;
   text-align: center;
   transition: all 0.1s ease;
@@ -767,9 +767,8 @@ linear-gradient(
 }
 
 .notepad-menu .menu-item:hover {
-  background: #c0c0c0;
-  border: 1px solid #ffffff #808080 #808080 #ffffff;
-  box-shadow: inset 1px 1px 0 #ffffff, inset -1px -1px 0 #808080;
+  background: #1660e8;
+color: #ffffff;
 }
 
 .notepad-menu .menu-item:active {
@@ -784,10 +783,18 @@ linear-gradient(
   position: absolute;
   top: 100%;
   left: 0;
-  background: #c0c0c0;
-  border: 2px solid;
-  border-color: #ffffff #808080 #808080 #ffffff;
-  box-shadow: 1px 1px 0 rgba(0,0,0,0.3), inset 1px 1px 0 rgba(255,255,255,0.7);
+
+  background: #ffffff;
+
+  border-top: 1px solid #808080;
+  border-left: 1px solid #808080;
+
+  border-right: 2px solid #808080;
+  border-bottom: 2px solid #808080;
+
+  box-shadow: 1px 1px 0 rgba(0,0,0,0.3),
+              inset 1px 1px 0 rgba(255,255,255,0.7);
+
   z-index: 1000;
   min-width: 180px;
   padding: 2px 0;
@@ -805,25 +812,25 @@ linear-gradient(
   font-family: Tahoma, sans-serif;
   font-size: 11px;
   cursor: pointer;
-  background: #c0c0c0;
+  background: #ffffff;
   white-space: nowrap;
   user-select: none;
   transition: all 0.1s ease;
 }
 
 .menu-option:hover {
-  background: #000080;
+  background: #1660e8;
   color: #ffffff;
 }
 
 .menu-option:active {
-  background: #000080;
+  background: #1660e8;
   color: #ffffff;
 }
 
 .menu-separator {
   height: 2px;
-  background: linear-gradient(to right, #dfdfdf 0%, #808080 100%);
+  background: #cccccc;
   margin: 2px 0;
 }
 
