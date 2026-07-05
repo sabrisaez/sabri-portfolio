@@ -575,5 +575,73 @@ document.querySelectorAll('.menu-option.exit').forEach(option => {
       startMenu.setAttribute('aria-hidden', 'true');
     });
   }
-  
+  (function(){
+  const files = document.querySelectorAll(".file");
+  const detailsPanel = document.querySelector(".details");
+
+  let clickTimer = null;
+  let selected = null;
+
+  function updateDetails(file){
+    if (!detailsPanel || !file) return;
+
+    const name = file.dataset.name || "Unknown";
+    const desc = file.dataset.desc || "No description available";
+
+    detailsPanel.innerHTML = `
+      <h4>Details</h4>
+      <p><strong>${name}</strong></p>
+      <p>${desc}</p>
+    `;
+  }
+
+  function selectFile(file){
+    if (selected) selected.classList.remove("selected");
+    selected = file;
+    file.classList.add("selected");
+    updateDetails(file);
+  }
+
+  files.forEach(file => {
+
+    // CLICK (selección)
+    file.addEventListener("click", (e) => {
+      e.preventDefault();
+
+      selectFile(file);
+
+      // lógica de doble click manual
+      if (clickTimer === null) {
+        clickTimer = setTimeout(() => {
+          clickTimer = null;
+        }, 250);
+      } else {
+        clearTimeout(clickTimer);
+        clickTimer = null;
+
+        // DOBLE CLICK → abrir página
+        window.open(file.dataset.url, "_blank");
+      }
+    });
+
+  });
+document.addEventListener("click", (e) => {
+  const isFile = e.target.closest(".file");
+
+  // si no clickeó un archivo → limpiar selección
+  if (!isFile) {
+    document.querySelectorAll(".file.selected").forEach(f => {
+      f.classList.remove("selected");
+    });
+
+    const detailsPanel = document.querySelector(".details");
+    if (detailsPanel) {
+      detailsPanel.innerHTML = `
+        <h4>Details</h4>
+        <p>Select a project to see information</p>
+      `;
+    }
+  }
+});
+})();
 })();

@@ -872,3 +872,133 @@ color: #ffffff;
 .notepad-content p:last-child {
   margin-bottom: 0;
 }
+/* =========================
+   EXPLORER LAYOUT BASE
+========================= */
+
+.explorer{
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  height: 100%;
+}
+
+/* =========================
+   SIDEBAR (XP AZUL)
+========================= */
+
+.sidebar{
+  background: linear-gradient(#7389fe, #4057d3);
+  color: white;
+
+  font-size: 12px;
+}
+
+.sidebar h4{
+  margin: 0 0 10px;
+  font-size: 13px;
+}
+
+.sidebar ul{
+  padding-left: 16px;
+  margin: 0;
+}
+
+.sidebar li{
+  margin-bottom: 6px;
+  list-style: none;
+}
+
+/* =========================
+   FILE AREA (ICONS GRID)
+========================= */
+
+.file-area{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+  gap: 25px;
+  padding: 20px;
+  align-content: flex-start;
+  overflow-y: auto;
+}
+
+.file{
+  width: 90px;
+  text-align: center;
+  text-decoration: none;
+  color: black;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.file img{
+  width: 48px;
+  height: 48px;
+  display: block;
+  margin: 0 auto 6px;
+}
+
+.file:hover{
+  background: rgba(0,0,255,0.08);
+  border-radius: 4px;
+}
+.file.selected{
+  background: #cde5ff;
+  outline: 1px solid #4a90e2;
+  border-radius: 3px;
+}
+
+/* =========================
+   DETAILS PANEL
+========================= */
+
+.panel{
+    margin: 10px;
+
+border-radius: 4px 4px 0 0;
+    overflow: hidden;
+    background: #b1c5fb;
+
+}
+
+/* Encabezado */
+.panel h4{
+    margin: 0;
+    padding: 5px 10px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #2f467d;
+    background: linear-gradient(to right, #f0f0ff, #a5b8f9);
+}
+
+/* Contenido */
+.panel ul,
+.panel p{
+    margin: 0;
+    padding: 10px;
+    font-size: 12px;
+}
+
+.panel ul{
+    list-style: none;
+    padding-left: 10px;
+}
+
+.panel li{
+    margin-bottom: 6px;
+        color: #2f43ad;
+}
+
+.panel li:hover{
+  text-decoration: underline;
+  color: #517afe;
+  cursor: pointer;
+}
+
+.panel p{
+      color: #2f43ad;
+}
+
+.content.explorer{
+
+  padding: 0px;
+}

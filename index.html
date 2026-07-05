@@ -176,31 +176,62 @@
       </div>
     </div>
 
-    <!-- Projects window -->
-    <div class="window" id="win-projects" data-icon="images/folder.png" aria-hidden="true" role="dialog" aria-label="Projects">
-      <div class="titlebar">
-        <div class="title">Projects</div>
-        <div class="controls">
-          <button class="minimize" aria-label="Minimize" title="Minimize">
-            <img src="images/minimize.png" alt="" />
-          </button>
-          <button class="maximize" aria-label="Maximize" title="Maximize">
-            <img src="images/maximize.png" alt="" />
-          </button>
-          <button class="close" aria-label="Close" title="Close">
-            <img src="images/exit.png" alt="" />
-          </button>
-        </div>
-      </div>
-      <div class="content">
-        <h3>My Projects</h3>
-        <ol>
-          <li><a href="https://integradornucba-nine.vercel.app/" target="_blank">🦷 Dental Clinic Website</a> A modern and responsive website built for a real dental clinic. The project includes service information, patient access, contact sections, and a clean, professional user interface focused on accessibility and user experience.</li>
-          <li><a href="https://integradorjs-rosy.vercel.app/" target="_blank">🎮 Retro Games Store</a> An interactive e-commerce project inspired by retro gaming. Users can browse products, add items to the shopping cart, manage quantities, and complete a simulated checkout process using JavaScript.</li>
-          <li><a href="https://landingreact.vercel.app/" target="_blank">💜 Kuromi Store UI</a> A modern e-commerce interface built with React for a Kuromi merchandise store. This project showcases component-based architecture, responsive design, and attention to visual details while creating a fun and engaging user experience.</li>
-        </ol>
-      </div>
+<!-- Projects window -->
+<div class="window" id="win-projects" data-icon="images/folder.png" aria-hidden="true">
+
+  <div class="titlebar">
+    <div class="title">Projects</div>
+
+    <div class="controls">
+      <button class="minimize"><img src="images/minimize.png" /></button>
+      <button class="maximize"><img src="images/maximize.png" /></button>
+      <button class="close"><img src="images/exit.png" /></button>
     </div>
+  </div>
+
+  <div class="content explorer">
+
+    <!-- LEFT PANEL -->
+    <aside class="sidebar">
+
+      <div class="panel tasks">
+        <h4>File and Folder Tasks</h4>
+        <ul>
+          <li>📂 Open folder</li>
+          <li>🌐 Open project</li>
+          <li>🧭 Navigate</li>
+        </ul>
+      </div>
+
+      <div class="panel details">
+        <h4>Details</h4>
+        <p>Select a project to see information</p>
+      </div>
+
+    </aside>
+
+    <!-- MAIN FILE AREA (AHORA CONTROLADO POR JS) -->
+    <main class="file-area">
+
+      <div class="file" data-url="https://integradornucba-nine.vercel.app/" data-name="Dental Clinic" data-desc="A modern and responsive website built for a real dental clinic. The project includes service information, patient access, contact sections, and a clean, professional user interface focused on accessibility and user experience.">
+        <img src="images/internetexplorericon.png" />
+        <span>Dental Clinic</span>
+      </div>
+
+      <div class="file" data-url="https://integradorjs-rosy.vercel.app/" data-name="Retro Gaming Store" data-desc="An interactive e-commerce project inspired by retro gaming. Users can browse products, add items to the shopping cart, manage quantities, and complete a simulated checkout process using JavaScript.">
+        <img src="images/internetexplorericon.png" />
+        <span>Retro Games</span>
+      </div>
+
+      <div class="file" data-url="https://landingreact.vercel.app/" data-name="Kuromi Store UI" data-desc="A modern e-commerce interface built with React for a Kuromi merchandise store. This project showcases component-based architecture, responsive design, and attention to visual details while creating a fun and engaging user experience.">
+        <img src="images/internetexplorericon.png" />
+        <span>Kuromi Store</span>
+      </div>
+
+    </main>
+
+  </div>
+</div>
 
     <!-- About Me window -->
 <div class="window" id="win-about" data-icon="images/notepad.png" aria-hidden="true" role="dialog" aria-label="About Me">
