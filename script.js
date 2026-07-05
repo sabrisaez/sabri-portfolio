@@ -1,4 +1,50 @@
 // script.js — icons layout, windows (move/resize), taskbar and persistence
+
+// ---------- Fix image paths for GitHub Pages ----------
+(function fixImagePaths() {
+  const BASE_PATH = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+    ? '' 
+    : '/sabri-portfolio';
+
+  // Arreglar todas las imágenes en el HTML
+  document.querySelectorAll('img').forEach(img => {
+    const src = img.getAttribute('src');
+    if (src && !src.includes('http') && !src.startsWith('data:') && !src.startsWith(BASE_PATH)) {
+      img.setAttribute('src', BASE_PATH + '/' + src);
+    }
+  });
+
+  // Arreglar background images en CSS
+  const wallpaper = document.querySelector('.wallpaper');
+  if (wallpaper) {
+    wallpaper.style.backgroundImage = `url('${BASE_PATH}/images/wallpaper.jpg')`;
+  }
+
+  // Arreglar data-icon en windows
+  document.querySelectorAll('[data-icon]').forEach(el => {
+    const icon = el.getAttribute('data-icon');
+    if (icon && !icon.includes('http') && !icon.startsWith('data:') && !icon.startsWith(BASE_PATH)) {
+      el.setAttribute('data-icon', BASE_PATH + '/' + icon);
+    }
+  });
+
+  // Arreglar src en iframes
+  document.querySelectorAll('iframe').forEach(iframe => {
+    const src = iframe.getAttribute('src');
+    if (src && !src.includes('http') && !src.startsWith(BASE_PATH)) {
+      iframe.setAttribute('src', BASE_PATH + '/' + src);
+    }
+  });
+
+  // Arreglar href en links de descarga
+  document.querySelectorAll('a[href*="resume"]').forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && !href.includes('http') && !href.startsWith(BASE_PATH) && !href.startsWith('mailto')) {
+      link.setAttribute('href', BASE_PATH + '/' + href);
+    }
+  });
+})();
+
 (function(){
   const ICON_POS_KEY = 'desktop_icon_positions_v1';
   const icons = document.querySelectorAll('.icon');
@@ -490,4 +536,5 @@
       startMenu.setAttribute('aria-hidden', 'true');
     });
   }
+  
 })();
