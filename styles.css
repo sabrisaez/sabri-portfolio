@@ -3,7 +3,7 @@
   --taskbar:#cfcfcf;
   --title:#0a4e8c;
   --window:#ffffff;
-  --titlebar-height: 28px;
+  --titlebar-height: 26px;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -73,23 +73,27 @@ html,body{
   cursor:grabbing;
 }
 
-/* ===== Windows ===== */
+/* ===== Windows XP STYLE WINDOW ===== */
 .window{
   position:absolute;
   width:420px;
   height:300px;
   background:var(--window);
-  border:2px solid #778899;
-  box-shadow: 6px 6px 0 rgba(0,0,0,0.25);
   display:none;
   z-index:10;
   top:80px;
   left:160px;
-  border-radius:2px;
-
-  /* allow resizer hit area outside window border while keeping content clipped */
-  overflow: visible;
+border-radius: 7px 7px 0 0;
+  overflow: hidden;
   box-sizing: border-box;
+  
+  /* Windows XP simple border */
+border-top: 1px solid #003CA4;
+border-left: 3px solid #003CA4;
+border-right: 3px solid #003CA4;
+border-bottom: 3px solid #003CA4;
+
+box-shadow: none;
 }
 
 /* ensure consistent sizing model */
@@ -97,46 +101,114 @@ html,body{
   box-sizing: border-box;
 }
 
+/* ===== WINDOWS XP TITLEBAR ===== */
 .titlebar{
-  height:var(--titlebar-height);
-  background:linear-gradient(180deg,var(--title), #0d4b82);
-  color:white;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:0 6px;
-  cursor:move;
-  width:100%;
-  box-sizing:border-box;
-  z-index:2;
+  height: var(--titlebar-height);
+background:
+linear-gradient(
+    to bottom,
+    #1B84FF 0%,
+    #036FFC 5%,
+    #0266F2 10%,
+    #005FEA 15%,
+    #005AE7 20%,
+    #0054E3 35%,
+    #0055EB 60%,
+    #0059F1 70%,
+    #0161F7 80%,
+    #026AFC 88%,
+    #0166F6 93%,
+    #004AC3 98%,
+    #003CA4 100%
+);
+  color: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2px 2px 2px 3px;
+  cursor: move;
+  width: 100%;
+  box-sizing: border-box;
+  z-index: 2;
 }
-.title{ font-weight:600; font-size:13px; }
+
+.title{ 
+  font-weight: 600; 
+  font-size: 12px;
+  color: #ffffff;
+  text-shadow: 1px 1px 0 rgba(0,0,0,0.3);
+  flex: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* XP-style window controls */
+.controls {
+  display: flex;
+  gap: 2px;
+  padding-right: 1px;
+}
+
 .controls button{
-  background:transparent;
-  border:none;
-  color:white;
-  font-weight:bold;
-  font-size:16px;
-  line-height:1;
-  width:28px;
-  height:22px;
-  cursor:pointer;
+  background: linear-gradient(180deg, #f0f0f0 0%, #d0d0d0 100%);
+  border: 1px solid #a0a0a0;
+  color: #000000;
+  font-weight: bold;
+  font-size: 10px;
+  line-height: 1;
+  width: 21px;
+  height: 20px;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  font-family: Tahoma, Arial, sans-serif;
+  transition: none;
+  flex: 0 0 auto;
+}
+
+.controls button:hover {
+  background: linear-gradient(180deg, #ffffff 0%, #e0e0e0 100%);
+}
+
+.controls button:active {
+  background: linear-gradient(180deg, #d0d0d0 0%, #f0f0f0 100%);
 }
 
 /* content occupies remaining space inside window and scrolls internally */
 .content{
-  padding:12px;
-  color:#222;
-  overflow:auto;
+  padding: 12px;
+  color: #000000;
+  overflow: auto;
   /* subtract titlebar height so content never overflows the window box */
   max-height: calc(100% - var(--titlebar-height));
   box-sizing: border-box;
-  position:relative;
+  position: relative;
+}
+
+.content h2, .content h3, .content h4 {
+  color: #000000;
+  margin-top: 0;
+}
+
+.content p, .content li {
+  color: #000000;
+}
+
+.content a {
+  color: #0066cc;
 }
 
 /* nicer scrollbar inside windows */
 .content::-webkit-scrollbar { width: 12px; height: 12px; }
-.content::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.18); border-radius: 8px; }
+.content::-webkit-scrollbar-track { background: #c0c0c0; }
+.content::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #dfdfdf 0%, #808080 100%); }
 
 /* taskbar */
 #taskbar{
@@ -372,16 +444,14 @@ html,body{
 /* Resizer — flush con la esquina inferior right and expanded hit area */
 .window .resizer {
   position: absolute;
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   right: 0;
   bottom: 0;
   cursor: se-resize;
   z-index: 9999;
-  background:
-    linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%);
-  border-radius: 2px;
-  box-shadow: rgba(0,0,0,0.12) 0 1px 0 inset;
+  background: transparent;
+  border-radius: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -399,35 +469,121 @@ html,body{
   pointer-events: auto;
 }
 
-/* small visual triangle */
+/* Windows XP resize indicator - diagonal lines pattern */
 .window .resizer::after{
   content: '';
   position: absolute;
-  right: 4px;
-  bottom: 4px;
-  width: 8px;
-  height: 8px;
-  background-image: linear-gradient(135deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.2) 100%);
-  transform: rotate(45deg);
-  opacity: 0.95;
-  border-radius: 1px;
+  right: 2px;
+  bottom: 2px;
+  width: 12px;
+  height: 12px;
+  background-image: 
+    repeating-linear-gradient(
+      45deg,
+      #808080,
+      #808080 1px,
+      transparent 1px,
+      transparent 3px
+    );
   pointer-events: none;
+  opacity: 0.8;
 }
 
 /* Title icon (small) — muestra el icono de la ventana al lado del título */
-.titlebar .title {
-  display: flex;
-  align-items: center;
-  gap: 0.6em;        /* separación entre icono y texto */
-  font-size: 13px;   /* coincide con el tamaño que ya usabas */
-}
-
-.titlebar .title .title-icon {
-  width: 1em;        /* igual a la altura de la fuente */
-  height: 1em;
+.titlebar .title-icon {
+  width: 16px;
+  height: 16px;
   display: inline-block;
   object-fit: contain;
-  flex: 0 0 1em;     /* no se estira */
-  border-radius: 2px; /* opcional, quita si no querés borde */
-  filter: none;      /* evita que reglas globales lo modifiquen */
+  flex: 0 0 16px;
+  filter: none;
+}
+#win-system .content{
+    padding:0;
+    background:#ECE9D8;
+    overflow:auto;
+}
+
+/* ---------- Tabs ---------- */
+
+#win-system .tabs{
+    display:flex;
+    gap:2px;
+    padding:8px 8px 0;
+    background:#ECE9D8;
+}
+
+#win-system .tab{
+    font-family:Tahoma,sans-serif;
+    font-size:11px;
+    padding:4px 14px;
+    border:1px solid #919B9C;
+    border-bottom:none;
+    background:#D4D0C8;
+    cursor:default;
+}
+
+#win-system .tab.active{
+    background:white;
+    position:relative;
+    top:1px;
+}
+
+/* ---------- Main Panel ---------- */
+
+#win-system .system-body{
+    background:white;
+    border:1px solid #919B9C;
+    margin:0 8px 8px;
+    padding:18px;
+    display:flex;
+    gap:24px;
+    min-height:340px;
+}
+
+/* ---------- Avatar ---------- */
+
+#win-system .system-logo{
+    width:120px;
+    flex-shrink:0;
+    text-align:center;
+}
+
+#win-system .system-logo img{
+    width:96px;
+    height:96px;
+    border:1px solid #999;
+    padding:3px;
+    background:white;
+}
+
+/* ---------- Info ---------- */
+
+#win-system .system-info{
+    flex:1;
+    font-family:Tahoma,sans-serif;
+    font-size:11px;
+    color:black;
+    line-height:1.5;
+}
+
+#win-system .system-info h2{
+    margin:0 0 18px;
+    font-size:20px;
+    font-weight:normal;
+}
+
+#win-system .system-info strong{
+    display:block;
+    margin-top:10px;
+    margin-bottom:2px;
+    font-weight:bold;
+}
+
+/* ---------- Separators ---------- */
+
+#win-system hr{
+    border:none;
+    border-top:1px solid #D4D0C8;
+    margin:14px 0;
 }

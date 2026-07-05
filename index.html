@@ -76,23 +76,87 @@
     </div>
 
     <!-- Windows -->
-    <div class="window" id="win-system" data-icon="images/system.png" aria-hidden="true" role="dialog" aria-label="System - Developer Edition">
-      <div class="titlebar">
-        <div class="title">System — Developer Edition</div>
+<div class="window" id="win-system" data-icon="images/system.png" aria-hidden="true" role="dialog" aria-label="System Properties">
+
+    <div class="titlebar">
+        <div class="title">System Properties</div>
+
         <div class="controls">
-          <button class="minimize" aria-label="Minimize">_</button>
-          <button class="close" aria-label="Close">×</button>
+            <button class="minimize" aria-label="Minimize">_</button>
+            <button class="close" aria-label="Close">×</button>
         </div>
-      </div>
-      <div class="content">
-        <h3>Developer Edition</h3>
-        <p><strong>Version</strong><br>1.0</p>
-        <p><strong>Experience</strong><br>Junior</p>
-        <p><strong>Languages</strong><br>Spanish · English</p>
-        <p><strong>Location</strong><br>Buenos Aires</p>
-        <p><strong>Status</strong><br>Available for Work</p>
-      </div>
     </div>
+
+    <div class="content system-properties">
+
+        <div class="tabs">
+            <button class="tab active">General</button>
+            <button class="tab">Skills</button>
+            <button class="tab">Experience</button>
+            <button class="tab">Contact</button>
+        </div>
+
+        <div class="system-body">
+
+            <div class="system-logo">
+                <img src="images/profile.png" alt="Profile">
+            </div>
+
+            <div class="system-info">
+
+                <h2>Sabrina Sáez</h2>
+
+                <p>
+                    <strong>Operating System</strong><br>
+                    Front-End Developer Edition
+                </p>
+
+                <p>
+                    <strong>Version</strong><br>
+                    1.0
+                </p>
+
+                <hr>
+
+                <p>
+                    <strong>Registered To</strong><br>
+                    Sabrina Sáez
+                </p>
+
+                <p>
+                    <strong>Location</strong><br>
+                    Buenos Aires, Argentina
+                </p>
+
+                <p>
+                    <strong>Languages</strong><br>
+                    Spanish · English
+                </p>
+
+                <p>
+                    <strong>Status</strong><br>
+                    Available for Work
+                </p>
+
+                <hr>
+
+                <p>
+                    <strong>Processor</strong><br>
+                    HTML5 • CSS3 • JavaScript
+                </p>
+
+                <p>
+                    <strong>Memory</strong><br>
+                    React • Git • Responsive Design
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
 
     <!-- Resume window (PDF) ahora id="win-resume" -->
     <div class="window" id="win-resume" data-icon="images/resume.png" aria-hidden="true" role="dialog" aria-label="Resume">
@@ -105,11 +169,11 @@
       </div>
       <div class="content" style="display:flex;flex-direction:column;height:100%;">
         <div style="flex:0 0 auto;margin-bottom:8px;">
-          <a href="files/Sabrina_Resume.pdf" target="_blank" download="Sabrina_Resume.pdf">Download Resume (PDF)</a>
+          <a href="/resume/resume.pdf" target="_blank" download="Sabrina_Resume.pdf">Download Resume (PDF)</a>
         </div>
         <div style="flex:1 1 auto; min-height:0;">
-          <iframe src="files/Sabrina_Resume.pdf" width="100%" height="100%" style="border:0;" title="Resume PDF">
-            <p>Your browser does not support inline PDF viewing. <a href="files/Sabrina_Resume.pdf" target="_blank">Click here to download the Resume</a>.</p>
+          <iframe src="/resume/resume.pdf" width="100%" height="100%" style="border:0;" title="Resume PDF">
+            <p>Your browser does not support inline PDF viewing. <a href="/resume/resume.pdf" target="_blank">Click here to download the Resume</a>.</p>
           </iframe>
         </div>
       </div>
