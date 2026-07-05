@@ -134,6 +134,9 @@
   };
   openWindow.topZ = 20;
 
+  // Expose openWindow globally for Start Menu
+  window.openWindowFunc = openWindow;
+
   function closeWindow(id){
     const win = document.getElementById(id);
     if(!win) return;
@@ -407,28 +410,84 @@
       folder.style.cursor = 'pointer';
     });
   })();
-// Insertar iconitos pequeños en la titlebar basados en data-icon de cada .window
-(function addTitleIcons(){
-  document.querySelectorAll('.window').forEach(function(win){
-    try {
-      var iconSrc = win.dataset && win.dataset.icon;
-      if (!iconSrc) return;
-      var titleEl = win.querySelector('.title');
-      if (!titleEl) return;
-      if (titleEl.querySelector('.title-icon')) return; // ya insertado
 
-      var img = document.createElement('img');
-      img.className = 'title-icon';
-      img.src = iconSrc;
-      img.alt = '';
-      img.setAttribute('aria-hidden','true');
+  // Insertar iconitos pequeños en la titlebar basados en data-icon de cada .window
+  (function addTitleIcons(){
+    document.querySelectorAll('.window').forEach(function(win){
+      try {
+        var iconSrc = win.dataset && win.dataset.icon;
+        if (!iconSrc) return;
+        var titleEl = win.querySelector('.title');
+        if (!titleEl) return;
+        if (titleEl.querySelector('.title-icon')) return; // ya insertado
 
-      // insertar al inicio del título
-      titleEl.insertBefore(img, titleEl.firstChild);
-    } catch (err) {
-      // no rompemos nada si falla
-      console.warn('addTitleIcons error', win.id, err);
+        var img = document.createElement('img');
+        img.className = 'title-icon';
+        img.src = iconSrc;
+        img.alt = '';
+        img.setAttribute('aria-hidden','true');
+
+        // insertar al inicio del título
+        titleEl.insertBefore(img, titleEl.firstChild);
+      } catch (err) {
+        // no rompemos nada si falla
+        console.warn('addTitleIcons error', win.id, err);
+      }
+    });
+  })();
+})();
+
+// ---------- Start Menu Toggle ----------
+(function(){
+  const startBtn = document.getElementById('start-btn');
+  const startMenu = document.getElementById('start-menu');
+  const desktop = document.getElementById('desktop');
+
+  // Toggle menu on button click
+  if (startBtn) {
+    startBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = startMenu.classList.contains('open');
+      if (isOpen) {
+        startMenu.classList.remove('open');
+        startMenu.setAttribute('aria-hidden', 'true');
+      } else {
+        startMenu.classList.add('open');
+        startMenu.setAttribute('aria-hidden', 'false');
+      }
+    });
+  }
+
+  // Close menu when clicking outside
+  document.addEventListener('click', (e) => {
+    if (startMenu && !startMenu.contains(e.target) && !startBtn.contains(e.target)) {
+      startMenu.classList.remove('open');
+      startMenu.setAttribute('aria-hidden', 'true');
     }
   });
-})();
+
+  // Handle menu items click - open windows
+  const menuItems = document.querySelectorAll('.start-menu-item:not(.shutdown)');
+  menuItems.forEach(item => {
+    item.addEventListener('click', (e) => {
+      const windowId = item.dataset.window;
+      // Close the menu
+      startMenu.classList.remove('open');
+      startMenu.setAttribute('aria-hidden', 'true');
+      // Open the window
+      if (typeof window.openWindowFunc === 'function') {
+        window.openWindowFunc(windowId);
+      }
+    });
+  });
+
+  // Shutdown button
+  const shutdownBtn = document.querySelector('.start-menu-item.shutdown');
+  if (shutdownBtn) {
+    shutdownBtn.addEventListener('click', () => {
+      alert('Thanks for visiting my portfolio! 👋');
+      startMenu.classList.remove('open');
+      startMenu.setAttribute('aria-hidden', 'true');
+    });
+  }
 })();

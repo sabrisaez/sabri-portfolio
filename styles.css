@@ -587,3 +587,130 @@ linear-gradient(
     border-top:1px solid #D4D0C8;
     margin:14px 0;
 }
+/* ===== START MENU ===== */
+.start-menu {
+  position: absolute;
+  bottom: 30px;
+  left: 0;
+  width: 260px;
+  background: linear-gradient(to right, #c0c0c0 0%, #dfdfdf 100%);
+  border: 2px solid;
+  border-color: #ffffff #808080 #808080 #ffffff;
+  box-shadow: 1px 1px 0 rgba(0,0,0,0.3), inset 1px 1px 0 rgba(255,255,255,0.7);
+  display: none;
+  flex-direction: column;
+  z-index: 999;
+  border-radius: 0;
+  padding: 0;
+  font-family: Tahoma, sans-serif;
+}
+
+.start-menu.open {
+  display: flex;
+}
+
+.start-menu[aria-hidden="false"] {
+  display: flex;
+}
+
+/* Header con usuario */
+.start-menu-header {
+  background: linear-gradient(to right, #000080, #1084d7);
+  padding: 10px;
+  color: white;
+  border-bottom: 1px solid #0a3f7c;
+}
+
+.user-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border: 2px solid #ffffff;
+  border-radius: 2px;
+  background: white;
+  padding: 2px;
+  box-sizing: border-box;
+}
+
+.user-name {
+  font-family: Tahoma, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: white;
+  text-shadow: 1px 1px 0 rgba(0,0,0,0.3);
+}
+
+/* Items del menú */
+.start-menu-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 4px 0;
+}
+
+.start-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: #000000;
+  font-family: Tahoma, sans-serif;
+  font-size: 12px;
+  cursor: pointer;
+  text-align: left;
+  font-weight: 500;
+  transition: all 0.1s ease;
+  margin: 0 4px;
+  border-radius: 2px;
+}
+
+.start-menu-item img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.start-menu-item:hover:not(.shutdown) {
+  background: linear-gradient(to right, #000080, #1084d7);
+  color: white;
+  border: 1px solid #0a5bb8;
+  border-radius: 2px;
+}
+
+.start-menu-item.shutdown {
+  margin-top: 4px;
+}
+
+.start-menu-item.shutdown:hover {
+  background: linear-gradient(to right, #000080, #1084d7);
+  color: white;
+  border: 1px solid #0a5bb8;
+  border-radius: 2px;
+}
+
+.start-menu-item:active {
+  background: linear-gradient(to right, #0a4a9c, #084ba5);
+  border: 1px solid #061f47;
+}
+
+/* Separadores */
+.start-menu-separator {
+  height: 2px;
+  background: linear-gradient(to right, #808080 0%, #ffffff 100%);
+  margin: 2px 0;
+}
+
+.start-menu-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 2px 0;
+}
