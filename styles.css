@@ -26,7 +26,7 @@ html,body{
 .wallpaper{
   position:absolute;
   inset:0;
-  background-image: url('/images/wallpaper.jpg');
+  background-image: url('images/wallpaper.jpg');
   background-size:cover;
   background-position:center;
   filter:brightness(0.96);
@@ -587,6 +587,7 @@ linear-gradient(
     border-top:1px solid #D4D0C8;
     margin:14px 0;
 }
+
 /* ===== START MENU ===== */
 .start-menu {
   position: absolute;
