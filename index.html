@@ -81,95 +81,87 @@
     </div>
 
     <!-- Windows -->
-<div class="window" id="win-system" data-icon="images/system.png" aria-hidden="true" role="dialog" aria-label="System Properties">
-
-    <div class="titlebar">
+    <div class="window" id="win-system" data-icon="images/system.png" aria-hidden="true" role="dialog" aria-label="System Properties">
+      <div class="titlebar">
         <div class="title">System Properties</div>
-
         <div class="controls">
-            <button class="minimize" aria-label="Minimize">_</button>
-            <button class="close" aria-label="Close">×</button>
+          <button class="minimize" aria-label="Minimize" title="Minimize">
+            <img src="images/minimize.png" alt="" />
+          </button>
+          <button class="maximize" aria-label="Maximize" title="Maximize">
+            <img src="images/maximize.png" alt="" />
+          </button>
+          <button class="close" aria-label="Close" title="Close">
+            <img src="images/exit.png" alt="" />
+          </button>
         </div>
-    </div>
-
-    <div class="content system-properties">
-
+      </div>
+      <div class="content system-properties">
         <div class="tabs">
-            <button class="tab active">General</button>
-            <button class="tab">Skills</button>
-            <button class="tab">Experience</button>
-            <button class="tab">Contact</button>
+          <button class="tab active">General</button>
+          <button class="tab">Skills</button>
+          <button class="tab">Experience</button>
+          <button class="tab">Contact</button>
         </div>
-
         <div class="system-body">
-
-            <div class="system-logo">
-                <img src="images/profile.png" alt="Profile">
-            </div>
-
-            <div class="system-info">
-
-                <h2>Sabrina Sáez</h2>
-
-                <p>
-                    <strong>Operating System</strong><br>
-                    Front-End Developer Edition
-                </p>
-
-                <p>
-                    <strong>Version</strong><br>
-                    1.0
-                </p>
-
-                <hr>
-
-                <p>
-                    <strong>Registered To</strong><br>
-                    Sabrina Sáez
-                </p>
-
-                <p>
-                    <strong>Location</strong><br>
-                    Buenos Aires, Argentina
-                </p>
-
-                <p>
-                    <strong>Languages</strong><br>
-                    Spanish · English
-                </p>
-
-                <p>
-                    <strong>Status</strong><br>
-                    Available for Work
-                </p>
-
-                <hr>
-
-                <p>
-                    <strong>Processor</strong><br>
-                    HTML5 • CSS3 • JavaScript
-                </p>
-
-                <p>
-                    <strong>Memory</strong><br>
-                    React • Git • Responsive Design
-                </p>
-
-            </div>
-
+          <div class="system-logo">
+            <img src="images/profile.png" alt="Profile">
+          </div>
+          <div class="system-info">
+            <h2>Sabrina Sáez</h2>
+            <p>
+              <strong>Operating System</strong><br>
+              Front-End Developer Edition
+            </p>
+            <p>
+              <strong>Version</strong><br>
+              1.0
+            </p>
+            <hr>
+            <p>
+              <strong>Registered To</strong><br>
+              Sabrina Sáez
+            </p>
+            <p>
+              <strong>Location</strong><br>
+              Buenos Aires, Argentina
+            </p>
+            <p>
+              <strong>Languages</strong><br>
+              Spanish · English
+            </p>
+            <p>
+              <strong>Status</strong><br>
+              Available for Work
+            </p>
+            <hr>
+            <p>
+              <strong>Processor</strong><br>
+              HTML5 • CSS3 • JavaScript
+            </p>
+            <p>
+              <strong>Memory</strong><br>
+              React • Git • Responsive Design
+            </p>
+          </div>
         </div>
-
+      </div>
     </div>
 
-</div>
-
-    <!-- Resume window (PDF) ahora id="win-resume" -->
+    <!-- Resume window (PDF) -->
     <div class="window" id="win-resume" data-icon="images/resume.png" aria-hidden="true" role="dialog" aria-label="Resume">
       <div class="titlebar">
         <div class="title">Resume — Sabrina</div>
         <div class="controls">
-          <button class="minimize" aria-label="Minimize">_</button>
-          <button class="close" aria-label="Close">×</button>
+          <button class="minimize" aria-label="Minimize" title="Minimize">
+            <img src="images/minimize.png" alt="" />
+          </button>
+          <button class="maximize" aria-label="Maximize" title="Maximize">
+            <img src="images/maximize.png" alt="" />
+          </button>
+          <button class="close" aria-label="Close" title="Close">
+            <img src="images/exit.png" alt="" />
+          </button>
         </div>
       </div>
       <div class="content" style="display:flex;flex-direction:column;height:100%;">
@@ -184,12 +176,20 @@
       </div>
     </div>
 
+    <!-- Projects window -->
     <div class="window" id="win-projects" data-icon="images/folder.png" aria-hidden="true" role="dialog" aria-label="Projects">
-      <div class="titlebar" >
+      <div class="titlebar">
         <div class="title">Projects</div>
         <div class="controls">
-          <button class="minimize" aria-label="Minimize">_</button>
-          <button class="close" aria-label="Close">×</button>
+          <button class="minimize" aria-label="Minimize" title="Minimize">
+            <img src="images/minimize.png" alt="" />
+          </button>
+          <button class="maximize" aria-label="Maximize" title="Maximize">
+            <img src="images/maximize.png" alt="" />
+          </button>
+          <button class="close" aria-label="Close" title="Close">
+            <img src="images/exit.png" alt="" />
+          </button>
         </div>
       </div>
       <div class="content">
@@ -202,25 +202,32 @@
       </div>
     </div>
 
-    <!-- About Me window ahora id="win-about" -->
+    <!-- About Me window -->
     <div class="window" id="win-about" data-icon="images/notepad.png" aria-hidden="true" role="dialog" aria-label="About Me">
       <div class="titlebar">
         <div class="title">Sabrina.txt</div>
         <div class="controls">
-          <button class="minimize" aria-label="Minimize">_</button>
-          <button class="close" aria-label="Close">×</button>
+          <button class="minimize" aria-label="Minimize" title="Minimize">
+            <img src="images/minimize.png" alt="" />
+          </button>
+          <button class="maximize" aria-label="Maximize" title="Maximize">
+            <img src="images/maximize.png" alt="" />
+          </button>
+          <button class="close" aria-label="Close" title="Close">
+            <img src="images/exit.png" alt="" />
+          </button>
         </div>
       </div>
       <div class="content">
         <h2>Hey! I'm Sabrina 👋</h2>
         <p>
-I'm a Front-End Developer and Medicine student with a passion for both technology and science. I love creating interactive web experiences while constantly learning new technologies.
+          I'm a Front-End Developer and Medicine student with a passion for both technology and science. I love creating interactive web experiences while constantly learning new technologies.
         </p>
         <p>
-I'm especially interested in Artificial Intelligence and hope to build my career in AI training and related fields. I enjoy solving problems, exploring how things work, and turning ideas into projects.
+          I'm especially interested in Artificial Intelligence and hope to build my career in AI training and related fields. I enjoy solving problems, exploring how things work, and turning ideas into projects.
         </p>
         <p>
-When I'm not coding or studying, you'll probably find me listening to music, spending time with animals, or learning something new.
+          When I'm not coding or studying, you'll probably find me listening to music, spending time with animals, or learning something new.
         </p>
       </div>
     </div>
@@ -230,30 +237,33 @@ When I'm not coding or studying, you'll probably find me listening to music, spe
       <div class="titlebar">
         <div class="title">Skills</div>
         <div class="controls">
-          <button class="minimize" aria-label="Minimize">_</button>
-          <button class="close" aria-label="Close">×</button>
+          <button class="minimize" aria-label="Minimize" title="Minimize">
+            <img src="images/minimize.png" alt="" />
+          </button>
+          <button class="maximize" aria-label="Maximize" title="Maximize">
+            <img src="images/maximize.png" alt="" />
+          </button>
+          <button class="close" aria-label="Close" title="Close">
+            <img src="images/exit.png" alt="" />
+          </button>
         </div>
       </div>
       <div class="content">
         <h3>Skills</h3>
         <p>Open a folder to see details:</p>
-
         <div class="folder-grid" aria-hidden="false" role="list" style="display:flex;flex-wrap:wrap;gap:16px;">
           <div class="folder" data-window="win-skills-frontend" tabindex="0" role="button" aria-label="Front-End folder" style="width:120px;text-align:center;cursor:pointer;">
             <div class="folder-icon" aria-hidden="true" style="font-size:40px;">📁</div>
             <div class="folder-label">Front‑End</div>
           </div>
-
           <div class="folder" data-window="win-skills-tools" tabindex="0" role="button" aria-label="Tools folder" style="width:120px;text-align:center;cursor:pointer;">
             <div class="folder-icon" aria-hidden="true" style="font-size:40px;">📁</div>
             <div class="folder-label">Tools</div>
           </div>
-
           <div class="folder" data-window="win-skills-learning" tabindex="0" role="button" aria-label="Learning folder" style="width:120px;text-align:center;cursor:pointer;">
             <div class="folder-icon" aria-hidden="true" style="font-size:40px;">📁</div>
             <div class="folder-label">Learning</div>
           </div>
-
           <div class="folder" data-window="win-skills-soft" tabindex="0" role="button" aria-label="Soft Skills folder" style="width:120px;text-align:center;cursor:pointer;">
             <div class="folder-icon" aria-hidden="true" style="font-size:40px;">📁</div>
             <div class="folder-label">Soft Skills</div>
@@ -267,8 +277,15 @@ When I'm not coding or studying, you'll probably find me listening to music, spe
       <div class="titlebar">
         <div class="title">Front‑End</div>
         <div class="controls">
-          <button class="minimize" aria-label="Minimize">_</button>
-          <button class="close" aria-label="Close">×</button>
+          <button class="minimize" aria-label="Minimize" title="Minimize">
+            <img src="images/minimize.png" alt="" />
+          </button>
+          <button class="maximize" aria-label="Maximize" title="Maximize">
+            <img src="images/maximize.png" alt="" />
+          </button>
+          <button class="close" aria-label="Close" title="Close">
+            <img src="images/exit.png" alt="" />
+          </button>
         </div>
       </div>
       <div class="content">
@@ -287,8 +304,15 @@ When I'm not coding or studying, you'll probably find me listening to music, spe
       <div class="titlebar">
         <div class="title">Tools</div>
         <div class="controls">
-          <button class="minimize" aria-label="Minimize">_</button>
-          <button class="close" aria-label="Close">×</button>
+          <button class="minimize" aria-label="Minimize" title="Minimize">
+            <img src="images/minimize.png" alt="" />
+          </button>
+          <button class="maximize" aria-label="Maximize" title="Maximize">
+            <img src="images/maximize.png" alt="" />
+          </button>
+          <button class="close" aria-label="Close" title="Close">
+            <img src="images/exit.png" alt="" />
+          </button>
         </div>
       </div>
       <div class="content">
@@ -306,8 +330,15 @@ When I'm not coding or studying, you'll probably find me listening to music, spe
       <div class="titlebar">
         <div class="title">Learning</div>
         <div class="controls">
-          <button class="minimize" aria-label="Minimize">_</button>
-          <button class="close" aria-label="Close">×</button>
+          <button class="minimize" aria-label="Minimize" title="Minimize">
+            <img src="images/minimize.png" alt="" />
+          </button>
+          <button class="maximize" aria-label="Maximize" title="Maximize">
+            <img src="images/maximize.png" alt="" />
+          </button>
+          <button class="close" aria-label="Close" title="Close">
+            <img src="images/exit.png" alt="" />
+          </button>
         </div>
       </div>
       <div class="content">
@@ -325,8 +356,15 @@ When I'm not coding or studying, you'll probably find me listening to music, spe
       <div class="titlebar">
         <div class="title">Soft Skills</div>
         <div class="controls">
-          <button class="minimize" aria-label="Minimize">_</button>
-          <button class="close" aria-label="Close">×</button>
+          <button class="minimize" aria-label="Minimize" title="Minimize">
+            <img src="images/minimize.png" alt="" />
+          </button>
+          <button class="maximize" aria-label="Maximize" title="Maximize">
+            <img src="images/maximize.png" alt="" />
+          </button>
+          <button class="close" aria-label="Close" title="Close">
+            <img src="images/exit.png" alt="" />
+          </button>
         </div>
       </div>
       <div class="content">
@@ -344,8 +382,15 @@ When I'm not coding or studying, you'll probably find me listening to music, spe
       <div class="titlebar">
         <div class="title">Contact</div>
         <div class="controls">
-          <button class="minimize" aria-label="Minimize">_</button>
-          <button class="close" aria-label="Close">×</button>
+          <button class="minimize" aria-label="Minimize" title="Minimize">
+            <img src="images/minimize.png" alt="" />
+          </button>
+          <button class="maximize" aria-label="Maximize" title="Maximize">
+            <img src="images/maximize.png" alt="" />
+          </button>
+          <button class="close" aria-label="Close" title="Close">
+            <img src="images/exit.png" alt="" />
+          </button>
         </div>
       </div>
       <div class="content">

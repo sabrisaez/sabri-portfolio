@@ -200,7 +200,7 @@
     icon.addEventListener('keydown', (e)=> { if(e.key === 'Enter') openWindow(icon.dataset.window); });
   });
 
-  // ---------- Window controls, drag and resize ----------
+    // ---------- Window controls, drag and resize ----------
   document.querySelectorAll('.window').forEach(win=>{
     const closeBtn = win.querySelector('.close');
     if (closeBtn) closeBtn.addEventListener('click', ()=> closeWindow(win.id));
@@ -214,6 +214,36 @@
       if (tbBtn) { tbBtn.classList.add('minimized'); tbBtn.classList.remove('focus'); }
     });
 
+    // Maximize button functionality
+    const maxBtn = win.querySelector('.maximize');
+    if (maxBtn) {
+      maxBtn.addEventListener('click', ()=> {
+        const isMaximized = win.dataset.maximized === 'true';
+        
+        if (isMaximized) {
+          // Restore to previous size
+          win.style.left = win.dataset.prevLeft + 'px';
+          win.style.top = win.dataset.prevTop + 'px';
+          win.style.width = win.dataset.prevWidth + 'px';
+          win.style.height = win.dataset.prevHeight + 'px';
+          win.dataset.maximized = 'false';
+        } else {
+          // Save current state
+          win.dataset.prevLeft = parseInt(win.style.left) || win.getBoundingClientRect().left;
+          win.dataset.prevTop = parseInt(win.style.top) || win.getBoundingClientRect().top;
+          win.dataset.prevWidth = parseInt(win.style.width) || win.getBoundingClientRect().width;
+          win.dataset.prevHeight = parseInt(win.style.height) || win.getBoundingClientRect().height;
+          
+          // Maximize
+          win.style.left = '0px';
+          win.style.top = '0px';
+          win.style.width = window.innerWidth + 'px';
+          win.style.height = (window.innerHeight - 30) + 'px'; // 30px para la taskbar
+          win.dataset.maximized = 'true';
+        }
+        persistWindowState(win);
+      });
+    }
     // ensure resizer exists (create if missing)
     if (!win.querySelector('.resizer')) {
       const r = document.createElement('div');
