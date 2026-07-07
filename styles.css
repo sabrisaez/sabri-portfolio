@@ -803,22 +803,21 @@ background: linear-gradient(
   color: #ffffff;
 }
 
-.start-menu-footer. start-menu-item:hover{
+.start-menu-footer:hover{
  background-color: #3a6bdb;
 }
 
 
-/* Notepad Menu Styling */
-.notepad-menu {
+/* Window Menu Styling */
+.window-menu {
   background: #EDEAD6;
 
-  border-bottom: 1px solid #808080;
+  border-bottom: 1px solid #e5e4d9;
 
   display: flex;
   gap: 0;
 }
 
-/* Notepad window styling */
 #win-about .content {
   display: flex;
   flex-direction: column;
@@ -833,7 +832,7 @@ background: linear-gradient(
   flex: 0 0 auto;
 }
 
-#win-about .notepad-menu {
+#win-about .window-menu {
   flex: 0 0 auto;
 }
 
@@ -841,7 +840,7 @@ background: linear-gradient(
   position: relative;
 }
 
-.notepad-menu .menu-item {
+.window-menu .menu-item {
   background: transparent;
   border: 1px solid transparent;
   color: #000000;
@@ -857,15 +856,131 @@ background: linear-gradient(
   justify-content: center;
 }
 
-.notepad-menu .menu-item:hover {
+.window-menu .menu-item:hover {
   background: #1660e8;
 color: #ffffff;
 }
 
-.notepad-menu .menu-item:active {
+.window-menu .menu-item:active {
   background: #c0c0c0;
   border: 1px solid #808080 #ffffff #ffffff #808080;
   box-shadow: inset 1px 1px 0 #808080, inset -1px -1px 0 #ffffff;
+}
+
+.window-menu-buttons {
+  background: #EDEAD6;
+border-top: 1px solid #efeddf;
+  border-bottom: 1px solid #e5e4d9;
+
+  display: flex;
+  gap: 0;
+}
+
+.menu-item-buttons {
+  background: transparent;
+  border: 1px solid transparent;
+  color: #000000;
+  font-family: Tahoma, sans-serif;
+  font-size: 11px;
+gap: 3px;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.1s ease;
+  height: 33px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-item-buttons {
+  border: 1px solid transparent;
+}
+
+.menu-item-buttons:hover {
+  border-color: #c5c5ba;
+  border-radius: 3px;
+}
+
+.menu-item-buttons img {
+  width: 23px;
+  height: 23px;
+
+}
+
+.menu-item-buttons:active {
+  background: #c0c0c0;
+  border: 1px solid #808080 #ffffff #ffffff #808080;
+  box-shadow: inset 1px 1px 0 #808080, inset -1px -1px 0 #ffffff;
+}
+
+.menu-separation {
+  width: 1px;
+  height: 29px;
+  background: #d6d4c6;
+margin-top: 2px;
+margin-bottom: 2px;
+}
+/*Windows Address*/
+.window-address {
+  background: #EDEAD6;
+  border-top: 1px solid #efeddf;
+  border-bottom: 1px solid #e5e4d9;
+
+  display: flex;
+  align-items: center;
+  gap: 6px;
+padding-left: 4px;
+}
+
+.address-label {
+  white-space: nowrap;
+  color: #828faa;
+  font-size: 10px;
+}
+
+.address-box {
+  flex: 1;
+  height: 18px;
+  background: white;
+  border: 1px solid #808080;
+
+  display: flex;
+  align-items: center;
+
+}
+
+.address-icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 5px;
+  margin-left: 2px;
+}
+
+.address-name {
+  flex: 1;
+  font-size: 11px;
+}
+
+.dropdown-arrow {
+  width: 14px;
+  height: 14px;
+  margin-right: 1px;
+}
+
+.go-button {
+  height: 18px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: #EDEAD6;
+  border: none;
+  font-size: 11px;
+  margin-right: 10px;
+}
+
+.go-button img{
+    width: 16px;
+  height: 16px;
 }
 
 /* Menu popup */
@@ -997,6 +1112,12 @@ color: #ffffff;
 .sidebar li{
   margin-bottom: 6px;
   list-style: none;
+}
+
+.sidebar img{
+  height: 15px;
+  width: 15px;
+  vertical-align: middle;
 }
 
 /* =========================
