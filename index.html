@@ -514,44 +514,84 @@
       </button>
       <!-- Start Menu Dropdown -->
       <div id="start-menu" class="start-menu" aria-hidden="true" role="menu">
+                <div class="start-menu-separator-header-top"></div>
         <div class="start-menu-header">
           <div class="user-section">
-            <img src="images/profile.png" alt="User" class="user-avatar" />
+            <img src="images/sabriavatar.jpeg" alt="User" class="user-avatar" />
             <span class="user-name">Sabrina Sáez</span>
           </div>
         </div>
-        <div class="start-menu-separator"></div>
-        <div class="start-menu-items">
-          <button class="start-menu-item" data-window="win-system" role="menuitem">
-            <img src="images/system.png" alt="" />
-            <span>System</span>
-          </button>
-          <button class="start-menu-item" data-window="win-projects" role="menuitem">
-            <img src="images/folder.png" alt="" />
-            <span>Projects</span>
-          </button>
-          <button class="start-menu-item" data-window="win-skills" role="menuitem">
-            <img src="images/skills.png" alt="" />
-            <span>Skills</span>
-          </button>
-          <button class="start-menu-item" data-window="win-about" role="menuitem">
-            <img src="images/notepad.png" alt="" />
-            <span>About Me</span>
-          </button>
-          <button class="start-menu-item" data-window="win-resume" role="menuitem">
-            <img src="images/resume.png" alt="" />
-            <span>Resume</span>
-          </button>
-          <button class="start-menu-item" data-window="win-contact" role="menuitem">
-            <img src="images/messenger.png" alt="" />
-            <span>Contact</span>
-          </button>
-        </div>
-        <div class="start-menu-separator"></div>
+        <div class="start-menu-separator-top"></div>
+ <div class="start-menu-items">
+  <!-- Columna izquierda -->
+  <div class="start-menu-column-left">
+    <button class="start-menu-item" data-window="win-system" role="menuitem">
+      <img src="images/system.png" alt="" />
+      <span>System</span>
+    </button>
+
+    <button class="start-menu-item" data-window="win-skills" role="menuitem">
+      <img src="images/skills.png" alt="" />
+      <span>Skills</span>
+    </button>
+        <div class="start-menu-separator-left"></div>
+    <button class="start-menu-item" data-window="win-resume" role="menuitem">
+      <img src="images/resume.png" alt="" />
+      <span>Resume</span>
+    </button>
+
+    <button class="start-menu-item" data-window="win-projects" role="menuitem">
+      <img src="images/folder.png" alt="" />
+      <span>Projects</span>
+    </button>
+
+    <button class="start-menu-item" data-window="win-about" role="menuitem">
+      <img src="images/notepad.png" alt="" />
+      <span>About Me</span>
+    </button>
+
+    <button class="start-menu-item" data-window="win-contact" role="menuitem">
+      <img src="images/messenger.png" alt="" />
+      <span>Contact</span>
+    </button>
+  </div>
+
+  <!-- Columna derecha -->
+  <div class="start-menu-column-right">
+    <button class="start-menu-item" role="menuitem">
+      <img src="images/folder.png" alt="" />
+      <span>Documents</span>
+    </button>
+
+    <button class="start-menu-item" role="menuitem">
+      <img src="images/folder.png" alt="" />
+      <span>Pictures</span>
+    </button>
+        <div class="start-menu-separator-right"></div>
+    <button class="start-menu-item" role="menuitem">
+      <img src="images/folder.png" alt="" />
+      <span>Music</span>
+    </button>
+
+    <button class="start-menu-item" role="menuitem">
+      <img src="images/folder.png" alt="" />
+      <span>My Computer</span>
+    </button>
+        <div class="start-menu-separator-right"></div>
+    <button class="start-menu-item" role="menuitem">
+      <img src="images/folder.png" alt="" />
+      <span>Control Panel</span>
+    </button>
+  </div>
+</div>
         <div class="start-menu-footer">
+                    <button class="start-menu-item shutdown" role="menuitem">
+            <img src="images/logout.png" alt="Log Off" />
+            <span>Log Off</span>
+          </button>
           <button class="start-menu-item shutdown" role="menuitem">
-            <img src="images/system.png" alt="" />
-            <span>Shut Down...</span>
+            <img src="images/power.png" alt="Turn Off" />
+            <span>Turn Off Computer</span>
           </button>
         </div>
       </div>

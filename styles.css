@@ -595,15 +595,20 @@ linear-gradient(
   position: absolute;
   bottom: 30px;
   left: 0;
-  width: 260px;
-  background: linear-gradient(to right, #c0c0c0 0%, #dfdfdf 100%);
+  width: 385px;
+  height: 476px;
+
+  background: #ffffff;
   border: 2px solid;
-  border-color: #ffffff #808080 #808080 #ffffff;
-  box-shadow: 1px 1px 0 rgba(0,0,0,0.3), inset 1px 1px 0 rgba(255,255,255,0.7);
+  border-color: #1162cc #4282d6 #0f61cb #4282d6;
+  box-shadow: 1px 1px 0 rgba(0,0,0,0.3),
+              inset 1px 1px 0 rgba(255,255,255,0.7);
+
   display: none;
   flex-direction: column;
   z-index: 999;
-  border-radius: 0;
+border-radius: 8px 8px 0 0;
+
   padding: 0;
   font-family: Tahoma, sans-serif;
 }
@@ -618,10 +623,12 @@ linear-gradient(
 
 /* Header con usuario */
 .start-menu-header {
-  background: linear-gradient(to right, #000080, #1084d7);
+  background: linear-gradient(#1062cc, #4791eb);
   padding: 10px;
   color: white;
-  border-bottom: 1px solid #0a3f7c;
+  border-bottom: 1px solid #385de7;
+  border-top: #85b0e5;
+  border-radius: 4px 4px 0 0;
 }
 
 .user-section {
@@ -633,10 +640,10 @@ linear-gradient(
 .user-avatar {
   width: 40px;
   height: 40px;
-  border: 2px solid #ffffff;
-  border-radius: 2px;
+  border: 2px solid #b8c8dd;
+  border-radius: 3px;
   background: white;
-  padding: 2px;
+
   box-sizing: border-box;
 }
 
@@ -651,27 +658,54 @@ linear-gradient(
 /* Items del menú */
 .start-menu-items {
   display: flex;
+flex: 1;
+
+}
+
+/* Columna izquierda */
+.start-menu-column-left {
+  flex: 1;
+  display: flex;
   flex-direction: column;
   gap: 0;
-  padding: 4px 0;
+  background: #ffffff;
+}
+
+/* Columna derecha */
+.start-menu-column-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  background-color: #cbe3ff;
 }
 
 .start-menu-item {
   display: flex;
   align-items: center;
   gap: 10px;
+  width: 100%;
   padding: 8px 12px;
   border: 1px solid transparent;
   background: transparent;
-  color: #000000;
+  color: #000;
   font-family: Tahoma, sans-serif;
   font-size: 12px;
   cursor: pointer;
   text-align: left;
   font-weight: 500;
   transition: all 0.1s ease;
-  margin: 0 4px;
   border-radius: 2px;
+  margin: 0;
+
+}
+
+.start-menu-column-left,
+.start-menu-column-right {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;   /* botones arriba */
 }
 
 .start-menu-item img {
@@ -681,19 +715,21 @@ linear-gradient(
   flex-shrink: 0;
 }
 
+/* Hover de los elementos */
 .start-menu-item:hover:not(.shutdown) {
-  background: linear-gradient(to right, #000080, #1084d7);
+  background: #2f71cd;
   color: white;
   border: 1px solid #0a5bb8;
   border-radius: 2px;
 }
 
+/* Botón de apagado */
 .start-menu-item.shutdown {
   margin-top: 4px;
 }
 
 .start-menu-item.shutdown:hover {
-  background: linear-gradient(to right, #000080, #1084d7);
+  background: #2f71cd;
   color: white;
   border: 1px solid #0a5bb8;
   border-radius: 2px;
@@ -705,18 +741,73 @@ linear-gradient(
 }
 
 /* Separadores */
-.start-menu-separator {
+
+.start-menu-separator-header-top {
   height: 2px;
-  background: linear-gradient(to right, #808080 0%, #ffffff 100%);
-  margin: 2px 0;
+background: linear-gradient(
+    to right,
+    #3575c6 0%,
+    #85b0e5 50%,
+    #3575c6 100%
+);
+
+}
+.start-menu-separator-top {
+  height: 2px;
+background: linear-gradient(
+    to right,
+    #ffffff 0%,
+    #dc8d51 50%,
+    #cbe2fe 100%
+);
+
+}
+
+.start-menu-separator-left {
+  height: 2px;
+background: linear-gradient(
+    to right,
+    #ffffff 0%,
+    #e6e6e6 50%,
+    #ffffff 100%
+);
+
+}
+
+.start-menu-separator-right {
+  height: 2px;
+background: linear-gradient(
+    to right,
+    #cbe3ff 0%,
+    #9bc1eb 50%,
+    #cbe3ff 100%
+);
+
 }
 
 .start-menu-footer {
   display: flex;
-  flex-direction: column;
-  gap: 0;
-  padding: 2px 0;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: auto;
+  background: linear-gradient(#418ae3, #0f61cb);
+  border-top: 1px solid #385de7;
 }
+.start-menu-footer .start-menu-item {
+  width: auto;      /* ya no ocupa todo el ancho */
+  margin: 0;
+  padding: 6px 10px;
+  flex: none;
+  color: #ffffff;
+}
+
+.start-menu-footer. start-menu-item:hover{
+ background-color: #3a6bdb;
+}
+
+
 /* Notepad Menu Styling */
 .notepad-menu {
   background: #EDEAD6;
